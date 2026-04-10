@@ -53,9 +53,9 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _outlineThickness: 1.07
+    - _outlineThickness: 1.13
     m_Colors:
-    - _color: {r: 0.8930817, g: 0.28365165, b: 0.8742736, a: 1}
+    - _color: {r: 1, g: 0, b: 0.9679489, a: 1}
     - _emission: {r: 0.5849056, g: 0.29613143, b: 0.52571577, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
