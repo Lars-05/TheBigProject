@@ -3,9 +3,10 @@ using UnityEngine;
 public class InteractableDetector : MonoBehaviour
 {
     [SerializeField] private Camera camera;
-    [SerializeField] LayerMask interactableLayer;
+    [SerializeField] private LayerMask interactableLayer;
     private IInteractable _lastInteractable = null;
-    void FixedUpdate()
+    
+    private void FixedUpdate()
     {
         Vector3 dir =   camera.transform.forward;
         Debug.DrawRay(camera.transform.position, dir );
@@ -23,10 +24,11 @@ public class InteractableDetector : MonoBehaviour
                 return;
             }
         }
-        if (_lastInteractable != null)
-        {
-            _lastInteractable.OnHoverExit();
-            _lastInteractable = null;
-        }
+
+        if (_lastInteractable == null)
+            return;
+
+        _lastInteractable.OnHoverExit();
+        _lastInteractable = null;
     }
 }
