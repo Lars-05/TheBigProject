@@ -1,15 +1,17 @@
 using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
 public class DialogDisplayer : MonoBehaviour
 {
+    [SerializeField] private Vector3 punch;
     [SerializeField] private TextMeshProUGUI textField;
     public float typeSpeed;
 
     void Start()
     {
-        DisplayText("wawa wawa wawa wawawawa wawa wawawawawawawawawawawawawawawawa");
+        DisplayText("wawa wawa wawa wawawawa              wawa wawawawawawawawawawawawawawawawa");
     }
     
     void DisplayText(string text)
@@ -23,6 +25,9 @@ public class DialogDisplayer : MonoBehaviour
         foreach (char c in text)
         {
             textField.text += c;
+            if(char.IsWhiteSpace(c))
+                continue;
+            this.gameObject.transform.DOPunchRotation(punch, typeSpeed, 10, 1);
             yield return new WaitForSeconds(typeSpeed);
         }
     }
