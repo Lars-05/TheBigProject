@@ -8,8 +8,6 @@ public class InteractableDetector : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private LayerMask _interactableLayer;
     private IInteractable _lastInteractable = null;
-    
-    
     private void FixedUpdate()
     {
         Vector3 dir = _camera.transform.forward;
@@ -28,10 +26,6 @@ public class InteractableDetector : MonoBehaviour
                 return;
             }
         }
-
-        
-        
-        
         if (_lastInteractable == null)
             return;
 
@@ -47,12 +41,11 @@ public class InteractableDetector : MonoBehaviour
     }
 
     private IDisposable disposable; // null
-    void OnEnable()
+    private void OnEnable()
     {
         disposable = InputManager.Instance.BindPerformed("Interact",Interact);
     }
-
-    void OnDisable()
+    private void OnDisable()
     {
         disposable.Dispose();
     }
