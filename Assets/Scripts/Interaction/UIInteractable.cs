@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InteractableTest : MonoBehaviour, IInteractable
+public class UIInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private Material _defaultMaterial;
     [SerializeField] private Material _selectedMaterial;
@@ -40,5 +40,6 @@ public class InteractableTest : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
+        Debug.Log("dddd");
     }
 }

@@ -23,6 +23,8 @@ public class InputManager : MonoBehaviour
     public IDisposable BindPerformed(string actionName, Action<InputAction.CallbackContext> callback)
     {
         InputAction inputAction = GetAction(actionName);
+        Debug.Log(inputAction);
+
         inputAction.performed += callback;
         
         return new InputSubscription(() =>

@@ -1,10 +1,14 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InteractableDetector : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private LayerMask _interactableLayer;
     private IInteractable _lastInteractable = null;
+    
     
     private void FixedUpdate()
     {
@@ -25,10 +29,31 @@ public class InteractableDetector : MonoBehaviour
             }
         }
 
+        
+        
+        
         if (_lastInteractable == null)
             return;
 
         _lastInteractable.OnHoverExit();
         _lastInteractable = null;
+    }
+
+    private void Interact(InputAction.CallbackContext _)
+    {
+        Debug.Log("PRESSED");
+        if(_lastInteractable != null)
+            _lastInteractable.OnInteract();
+    }
+
+    private IDisposable disposable; // null
+    void OnEnable()
+    {
+        disposable = InputManager.Instance.BindPerformed("Interact",Interact);
+    }
+
+    void OnDisable()
+    {
+        disposable.Dispose();
     }
 }
