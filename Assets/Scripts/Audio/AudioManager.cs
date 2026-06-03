@@ -21,10 +21,7 @@ public class AudioManager : MonoBehaviour
         
         _musicSource = _instance.gameObject.AddComponent<AudioSource>();
         _sfx = _instance.gameObject.AddComponent<AudioSource>();
-    }
-
-    private void Start()
-    {
+        
         foreach (var sound in Resources.LoadAll<AudioClip>("Audio"))
             _audios[sound.name] = sound;
     }
@@ -46,6 +43,27 @@ public class AudioManager : MonoBehaviour
         source.Play();
         Destroy(source, source.clip.length);
     }
+    
+    /// <summary>
+    /// Helper Tools Added by Me (Lars)
+    /// </summary>
+    /// ----------
+    public static void PlaySoundExternal(AudioClip audioClip, AudioSource source)
+    {
+        source.clip = audioClip;
+        source.Play();
+        Destroy(source, source.clip.length);
+    }
+    public static AudioSource InterceptSource(GameObject gameObject)
+    {
+        return gameObject.AddComponent<AudioSource>();
+    }
+    public static AudioClip GetAudioClip(string soundName)
+    {
+        Debug.Log(soundName);
+        return _audios[soundName];
+    }
+    /// ----------
 
     public void PlayMusic(string soundName)
     {
