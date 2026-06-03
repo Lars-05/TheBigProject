@@ -65,7 +65,7 @@ public class CassetteManager : MonoBehaviour
 
     private void IncreaseSanity()
     {
-        SanityDisplayer.GainSanity?.Invoke(_sanityPerSecond);
+        SanityManager.GainSanity?.Invoke(_sanityPerSecond);
     }
 
 }

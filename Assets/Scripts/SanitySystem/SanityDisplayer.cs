@@ -5,49 +5,15 @@ using UnityEngine.UI;
 
 public class SanityDisplayer : MonoBehaviour
 {
-    public delegate void SanityDisplayerEvent(int amount);
-    public static SanityDisplayerEvent GainSanity;
-    public static SanityDisplayerEvent LoseSanity;
-
     [SerializeField] private Slider _sanitySlider;
     [SerializeField] private float _sliderChangeDuration;
-    private int _currentSanity;
     private Tween _sliderTween;
-    private void Start()
-    {
-        _currentSanity = (int)_sanitySlider.value;
-    }
-
-    private void OnEnable()
-    {
-        GainSanity += IncreaseSanity;
-        LoseSanity += DecreaseSanity;
-    }
-    
-    private void OnDisable()
-    {
-        GainSanity -= IncreaseSanity;
-        LoseSanity -= DecreaseSanity;
-    }
-
-    public void IncreaseSanity(int amount)
-    {
-        _currentSanity += amount;
-        UpdateSlider();
-    }
-
-    public void DecreaseSanity(int amount)
-    {
-        _currentSanity -= amount;
-        UpdateSlider();
-    }
-
-    private void UpdateSlider()
+    public void UpdateSlider(float pSanity)
     {
         _sliderTween?.Kill();
 
         _sliderTween = _sanitySlider.DOValue(
-            _currentSanity,
+            pSanity,
             _sliderChangeDuration
         );
     }
