@@ -62,6 +62,16 @@ public class InputManager : MonoBehaviour
         else
             _playerInput.DeactivateInput();
     }
+
+    public void SwitchActionMap(string actionMapName)
+    {
+        var actionMap = _playerInput.actions.FindActionMap(actionMapName);
+        
+        if(actionMap == null)
+            throw new Exception($"ActionMap {actionMapName} does not exist");
+        
+        _playerInput.currentActionMap = actionMap;
+    }
     
     private InputAction GetAction(string actionName)
     {
