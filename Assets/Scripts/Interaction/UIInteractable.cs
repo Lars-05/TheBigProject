@@ -35,11 +35,11 @@ public class UIInteractable : MonoBehaviour, IInteractable
 
     public void OnHoverStay()
     {
-        Debug.Log("Hovering...");
+        
     }
 
     public void OnInteract()
     {
-        Debug.Log("dddd");
+        
     }
 }

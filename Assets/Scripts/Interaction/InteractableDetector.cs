@@ -35,7 +35,6 @@ public class InteractableDetector : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext _)
     {
-        Debug.Log("PRESSED");
         if(_lastInteractable != null)
             _lastInteractable.OnInteract();
     }

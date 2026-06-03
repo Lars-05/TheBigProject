@@ -23,7 +23,6 @@ public class InputManager : MonoBehaviour
     public IDisposable BindPerformed(string actionName, Action<InputAction.CallbackContext> callback)
     {
         InputAction inputAction = GetAction(actionName);
-        Debug.Log(inputAction);
 
         inputAction.performed += callback;
         
@@ -70,7 +69,9 @@ public class InputManager : MonoBehaviour
         if(actionMap == null)
             throw new Exception($"ActionMap {actionMapName} does not exist");
         
+        _playerInput.currentActionMap.Disable();
         _playerInput.currentActionMap = actionMap;
+        _playerInput.currentActionMap.Enable();
     }
     
     private InputAction GetAction(string actionName)

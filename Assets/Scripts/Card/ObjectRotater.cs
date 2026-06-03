@@ -1,9 +1,9 @@
+
 using System;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CardRotator : MonoBehaviour
+public class ObjectRotater : MonoBehaviour
 {
     [SerializeField] private Transform _objectTransform;
     
@@ -15,6 +15,7 @@ public class CardRotator : MonoBehaviour
     private IDisposable _clickDisposable;
     private IDisposable _clickReleaseDisposable;
     private IDisposable _moveDisposable;
+    private IDisposable _exitDisposable;
     
     
     private void OnEnable()
@@ -22,13 +23,15 @@ public class CardRotator : MonoBehaviour
         _clickDisposable = InputManager.Instance.BindPerformed("MouseClick", OnMouseClick);
         _moveDisposable = InputManager.Instance.BindPerformed("MouseMove", OnMouseMove);
         _clickReleaseDisposable = InputManager.Instance.BindCancelled("MouseClick", OnMouseRelease);
+        _clickReleaseDisposable = InputManager.Instance.BindPerformed("Exit", Exit);
     }
     
     private void OnDisable()
     {
-        _clickDisposable.Dispose();
-        _moveDisposable.Dispose();
-        _clickReleaseDisposable.Dispose();
+        _clickDisposable?.Dispose();
+        _moveDisposable?.Dispose();
+        _clickReleaseDisposable?.Dispose();
+        _exitDisposable?.Dispose();
     }
 
     private void FixedUpdate()
@@ -61,6 +64,14 @@ public class CardRotator : MonoBehaviour
 
         Vector2 mouseDelta = context.ReadValue<Vector2>();
         _rotateVelocity = mouseDelta * _rotateSpeed * Time.deltaTime;
+    }
+
+    private void Exit(InputAction.CallbackContext _)
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        InputManager.Instance.SwitchActionMap("Player");
+        Destroy(transform.parent.gameObject);
     }
     
 }

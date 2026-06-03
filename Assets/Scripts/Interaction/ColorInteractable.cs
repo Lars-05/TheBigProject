@@ -41,7 +41,6 @@ public class DebugInteractible : MonoBehaviour, IInteractable
     {
         if (_renderer == null)
             return;
-        Debug.Log("Hovering...");
     }
 
     private int i = 0;
