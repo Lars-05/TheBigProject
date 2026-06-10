@@ -15,8 +15,8 @@ public class Relic : MonoBehaviour, IInteractable
         _defaultMaterials = new Material[1];
         _selectedMaterials = new Material[2];
         
-        _defaultMaterials[0] = _defaultMaterial;
-        _selectedMaterials [0] = _defaultMaterial;
+        _defaultMaterials[0] = this.gameObject.GetComponent<MeshRenderer>().material;
+        _selectedMaterials [0] = this.gameObject.GetComponent<MeshRenderer>().material;
         _selectedMaterials[1] = _selectedMaterial;
 
     }
