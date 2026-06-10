@@ -539,6 +539,7 @@ MonoBehaviour:
   _moveSpeed: 10
   _minDistanceFromTarget: 5
   _teleportRadius: 102.5
+  _maxLookDuration: 10
   _mapCenter: {fileID: 1937785270}
 --- !u!195 &1330969444
 NavMeshAgent:
