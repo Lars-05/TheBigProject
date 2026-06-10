@@ -83,10 +83,10 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 8
   intensity:
     m_OverrideState: 1
-    m_Value: 0.203
+    m_Value: 0.387
   response:
     m_OverrideState: 1
     m_Value: 0.8
@@ -157,4 +157,4 @@ MonoBehaviour:
     m_Value: 0.261
   cropToFit:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0

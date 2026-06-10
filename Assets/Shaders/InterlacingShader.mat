@@ -42,7 +42,7 @@ Material:
     - _Speed: 0.02
     - _StripeDensity: 1
     m_Colors:
-    - _Color1: {r: 0.28930807, g: 0.28930807, b: 0.28930807, a: 0}
+    - _Color1: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0}
     - _Color2: {r: 0, g: 0, b: 0, a: 0.22745098}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
