@@ -539,7 +539,7 @@ MonoBehaviour:
   _weepingAngleLogic: {fileID: 1330969445}
   _teleportRadius: 102.5
   _maxLookDuration: 10
-  _lookAwayCooldownRate: 0
+  _lookAwayCooldownRate: 1
   _stalkSpeed: 3
   _minDistanceFromTarget: 5
   _maxSecondLookedAt: 10

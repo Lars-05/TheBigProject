@@ -61,7 +61,7 @@ public class BurningManAI : MonoBehaviour
             }
             else
             {
-                timeLookedAt -= _lookAwayCooldownRate;
+                timeLookedAt -= Time.deltaTime * _lookAwayCooldownRate;
                 _navMeshAgent.enabled = true;
                 GoToPosition(_target.transform.position);
             }
@@ -128,8 +128,8 @@ public class BurningManAI : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(_mapCenter.position, _teleportRadius);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(_mapCenter.position, _minDistanceFromTarget);
+        Gizmos.DrawWireSphere(_target.transform.position, _minDistanceFromTarget);
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(_mapCenter.position, _minDistanceForAttackTarget);
+        Gizmos.DrawWireSphere(_target.transform.position, _minDistanceForAttackTarget);
     }
 }
