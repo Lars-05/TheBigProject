@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Relic : MonoBehaviour, IInteractable 
 {
@@ -9,6 +10,8 @@ public class Relic : MonoBehaviour, IInteractable
     
     private Material[] _selectedMaterials;
     private Material[] _defaultMaterials;
+
+    public static UnityEvent OnRelicAdded;
     
     private void Awake()
     {
@@ -47,5 +50,6 @@ public class Relic : MonoBehaviour, IInteractable
         Cursor.visible = true;
         InputManager.Instance.SwitchActionMap("ObjectView");
         _rotateObject.SetActive(true);
+        OnRelicAdded.Invoke();
     }
 }
