@@ -534,13 +534,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 1330969444}
+  _mapCenter: {fileID: 1937785270}
   _target: {fileID: 896997713}
   _weepingAngleLogic: {fileID: 1330969445}
-  _moveSpeed: 10
-  _minDistanceFromTarget: 5
   _teleportRadius: 102.5
   _maxLookDuration: 10
-  _mapCenter: {fileID: 1937785270}
+  _lookAwayCooldownRate: 0
+  _stalkSpeed: 3
+  _minDistanceFromTarget: 5
+  _maxSecondLookedAt: 10
+  _chaseSpeed: 8
+  _maxChaseTime: 15
+  _minDistanceForAttackTarget: 3.42
+  _currentState: 0
 --- !u!195 &1330969444
 NavMeshAgent:
   m_ObjectHideFlags: 0
