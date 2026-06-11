@@ -3,8 +3,9 @@ using UnityEngine;
 public class WeepingAngleLogic : MonoBehaviour
 {
     [SerializeField] private Camera _playerCamera;
-    public bool CanMove()
+    public bool LookedAt()
     {
+
         return IsVisible(_playerCamera);
     }
     bool IsVisible(Camera cam)
