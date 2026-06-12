@@ -339,9 +339,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1589478474}
-        m_TargetAssemblyTypeName: StaminaDisplayer, Assembly-CSharp
-        m_MethodName: DecreaseSanity
+      - m_Target: {fileID: 1718996492}
+        m_TargetAssemblyTypeName: SanityManager, Assembly-CSharp
+        m_MethodName: IncreaseSanity
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1537,6 +1537,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677324480}
   m_CullTransparentMesh: 1
+--- !u!1 &1718996491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1718996493}
+  - component: {fileID: 1718996492}
+  m_Layer: 0
+  m_Name: SanityManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1718996492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718996491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a751cb9c4ed13764090c717c5cb6507c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sanityDisplayer: {fileID: 1589478474}
+--- !u!4 &1718996493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718996491}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.14877477, y: 0.65027267, z: -1.1922716}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1734843182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1677,9 +1722,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1589478474}
-        m_TargetAssemblyTypeName: StaminaDisplayer, Assembly-CSharp
-        m_MethodName: IncreaseSanity
+      - m_Target: {fileID: 1718996492}
+        m_TargetAssemblyTypeName: SanityManager, Assembly-CSharp
+        m_MethodName: DecreaseSanity
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1737,3 +1782,4 @@ SceneRoots:
   - {fileID: 719491914}
   - {fileID: 1734843182}
   - {fileID: 1319601249}
+  - {fileID: 1718996493}
