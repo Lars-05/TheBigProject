@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SocialPlatforms.GameCenter;
 
 public class CassetteManager : MonoBehaviour
@@ -66,6 +67,21 @@ public class CassetteManager : MonoBehaviour
     private void IncreaseSanity()
     {
         SanityManager.GainSanity?.Invoke(_sanityPerSecond);
+    }
+    
+    private void Play(InputAction.CallbackContext _)
+    {
+        OnCassettePlayerButtonClicked();
+    }
+
+    private IDisposable disposable; // null
+    private void OnEnable()
+    {
+        disposable = InputManager.Instance.BindPerformed("PlayCassette",Play);
+    }
+    private void OnDisable()
+    {
+        disposable.Dispose();
     }
 
 }
