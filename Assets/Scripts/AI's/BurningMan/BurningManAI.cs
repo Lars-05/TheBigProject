@@ -1,5 +1,3 @@
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -10,25 +8,25 @@ public class BurningManAI : MonoBehaviour
 {
     [Header("NavMesh")]
     [SerializeField] private NavMeshAgent _navMeshAgent;
+
     [Header("Dependencies")]
-    [SerializeField] private Transform _mapCenter;
-    [SerializeField] private Transform _target;
+    [SerializeField] private GameObject _spawnCenter;
+    [SerializeField] private GameObject _target;
     [SerializeField] private WeepingAngleLogic _weepingAngleLogic;
-    
+
     [Header("Stats")]
-    [SerializeField] private float _teleportRadius;
-    [SerializeField] private float _maxLookDuration;
-    [SerializeField] private float _lookAwayCooldownRate;
-        
+    [SerializeField] private float _teleportRadius = 25f;
+    [SerializeField] private float _lookAwayCooldownRate = 1f;
+
     [Header("Stalk Stats")]
-    [SerializeField] private float _stalkSpeed;
-    [SerializeField] private float _minDistanceFromTarget;
-    [SerializeField] private float _maxSecondLookedAt;
+    [SerializeField] private float _stalkSpeed = 3.5f;
+    [SerializeField] private float _minDistanceFromTarget = 5f;
+    [SerializeField] private float _maxSecondLookedAt = 5f;
 
     [Header("Chase Stats")]
-    [SerializeField] private float _chaseSpeed;
-    [SerializeField] private float _maxChaseTime;
-    [SerializeField] private float _minDistanceForAttackTarget;
+    [SerializeField] private float _chaseSpeed = 8f;
+    [SerializeField] private float _maxChaseTime = 10f;
+    [SerializeField] private float _minDistanceForAttackTarget = 1.5f;
 
     public enum States
     {
@@ -36,100 +34,170 @@ public class BurningManAI : MonoBehaviour
         CHASING
     }
 
-    [HideInInspector] public States _currentState;
-    
-    private float timeLookedAt = 0;
+    [HideInInspector]
+    public States _currentState;
 
-    void Start()
+    private float _timeLookedAt;
+    private float _timeChasing;
+
+    private void Awake()
+    {
+        if (_navMeshAgent == null)
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+
+        if (_weepingAngleLogic == null)
+            _weepingAngleLogic = GetComponent<WeepingAngleLogic>();
+    }
+
+    private void Start()
     {
         _currentState = States.STALKING;
         _navMeshAgent.speed = _stalkSpeed;
-              
-        
+
+        TeleportToRandomPosition();
     }
 
-    private float _timeChasing;
     private void Update()
     {
-        if (_currentState == States.STALKING)
+        if (_target == null || _spawnCenter == null)
+            return;
+
+        switch (_currentState)
         {
-            if (!_weepingAngleLogic.LookedAt())
-            {
-                Debug.Log("[BurningManAI]: Looked at for: " + timeLookedAt + " seconds");
-                timeLookedAt += Time.deltaTime;
+            case States.STALKING:
+                HandleStalking();
+                break;
+
+            case States.CHASING:
+                HandleChasing();
+                break;
+        }
+    }
+
+    private void HandleStalking()
+    {
+        bool isLookedAt = _weepingAngleLogic.LookedAt();
+
+        if (!isLookedAt)
+        {
+            _timeLookedAt += Time.deltaTime;
+
+            if (_navMeshAgent.enabled)
                 _navMeshAgent.enabled = false;
-            }
-            else
-            {
-                timeLookedAt -= Time.deltaTime * _lookAwayCooldownRate;
-                _navMeshAgent.enabled = true;
-                GoToPosition(_target.transform.position);
-            }
-            
-            if (Vector3.Distance(transform.position, _target.position) <= _minDistanceFromTarget || timeLookedAt > _maxSecondLookedAt)
-            {
-                StartChase();
-            }
+
+            Debug.Log($"[BurningManAI] Looked at for {_timeLookedAt:F2} seconds");
         }
-        
-        else if(_currentState == States.CHASING)
+        else
         {
-            _timeChasing += Time.deltaTime;
-            _navMeshAgent.speed = _chaseSpeed;
-            Debug.Log("[BurningManAI]: Is chasing you, seconds remaining: " + (_maxChaseTime - _timeChasing)  + " seconds");
+            _timeLookedAt = Mathf.Max(
+                0f,
+                _timeLookedAt - Time.deltaTime * _lookAwayCooldownRate
+            );
+
+            if (!_navMeshAgent.enabled)
+                _navMeshAgent.enabled = true;
+
             GoToPosition(_target.transform.position);
-            if (Vector3.Distance(transform.position, _target.position) <=  _minDistanceForAttackTarget)
-            {
-                Debug.Log("[BurningManAI]: Attacked");
-            }
-            if (_timeChasing < _maxChaseTime)
-                return;
-            
-            _navMeshAgent.speed = _stalkSpeed;
-            _timeChasing = 0;
-            Debug.Log("[BurningManAI]: Has stopped chasing");
-            _currentState = States.STALKING;
-            TeleportToRandomPosition();
         }
+
+        float distanceToTarget =
+            Vector3.Distance(transform.position, _target.transform.position);
+
+        if (distanceToTarget <= _minDistanceFromTarget ||
+            _timeLookedAt >= _maxSecondLookedAt)
+        {
+            StartChase();
+        }
+    }
+
+    private void HandleChasing()
+    {
+        _timeChasing += Time.deltaTime;
+
+        if (!_navMeshAgent.enabled)
+            _navMeshAgent.enabled = true;
+
+        _navMeshAgent.speed = _chaseSpeed;
+
+        GoToPosition(_target.transform.position);
+
+        Debug.Log(
+            $"[BurningManAI] Chasing. Time remaining: {(_maxChaseTime - _timeChasing):F2}"
+        );
+
+        float distanceToTarget =
+            Vector3.Distance(transform.position, _target.transform.position);
+
+        if (distanceToTarget <= _minDistanceForAttackTarget)
+        {
+            Debug.Log("[BurningManAI] Attacked target");
+            // Attack logic here
+        }
+
+        if (_timeChasing >= _maxChaseTime)
+        {
+            StopChase();
+        }
+    }
+
+    private void StartChase()
+    {
+        Debug.Log("[BurningManAI] Started chasing");
+
+        _currentState = States.CHASING;
+        _timeChasing = 0f;
+
+        if (!_navMeshAgent.enabled)
+            _navMeshAgent.enabled = true;
+
+        _navMeshAgent.speed = _chaseSpeed;
+    }
+
+    private void StopChase()
+    {
+        Debug.Log("[BurningManAI] Stopped chasing");
+
+        _currentState = States.STALKING;
+        _timeChasing = 0f;
+        _timeLookedAt = 0f;
+
+        _navMeshAgent.speed = _stalkSpeed;
+
+        TeleportToRandomPosition();
     }
 
     private void TeleportToRandomPosition()
     {
-        Debug.Log("[BurningManAI]: Teleported to random position");
-        Vector3 randomDirection = GetRandomPositionOnNavMesh();
-        
-        randomDirection += _mapCenter.position;
+        if (_spawnCenter == null)
+            return;
 
-        NavMeshHit hit;
-    
-        if (NavMesh.SamplePosition(randomDirection, out hit, _teleportRadius, NavMesh.AllAreas))
+        Vector3 randomPoint =
+            _spawnCenter.transform.position +
+            Random.insideUnitSphere * _teleportRadius;
+
+        if (NavMesh.SamplePosition(
+                randomPoint,
+                out NavMeshHit hit,
+                _teleportRadius,
+                NavMesh.AllAreas))
         {
-            transform.position = hit.position;
+            if (!_navMeshAgent.enabled)
+                _navMeshAgent.enabled = true;
+
+            _navMeshAgent.Warp(hit.position);
+
+            Debug.Log("[BurningManAI] Teleported");
         }
     }
-    
-    
-    private void StartChase()
-    {
-        _navMeshAgent.enabled = true;
-        _currentState = States.CHASING;
-    }
-    private Vector3 GetRandomPositionOnNavMesh()
-    {
-        return Random.insideUnitSphere * _teleportRadius;
-    }
-    
+
     private void GoToPosition(Vector3 position)
     {
+        if (!_navMeshAgent.enabled)
+            return;
+
+        if (!_navMeshAgent.isOnNavMesh)
+            return;
+
         _navMeshAgent.SetDestination(position);
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_mapCenter.position, _teleportRadius);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(_target.transform.position, _minDistanceFromTarget);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(_target.transform.position, _minDistanceForAttackTarget);
     }
 }
