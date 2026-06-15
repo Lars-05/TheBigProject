@@ -61,5 +61,9 @@ public class SanityManager : MonoBehaviour
         sanity -= amount;
         sanity = Mathf.Max(0, sanity);
         _sanityDisplayer.UpdateSlider(sanity);
+        if (sanity == 0)
+        {
+            EventBus.RaiseOnPlayerPassedOut();
+        }
     }
 }
