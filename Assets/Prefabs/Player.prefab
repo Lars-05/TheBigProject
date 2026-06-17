@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7613537970630865053}
   - component: {fileID: 8520262457412092987}
   - component: {fileID: 2585706676214229052}
-  - component: {fileID: 4561618668092256012}
   - component: {fileID: 2957251878330503935}
   - component: {fileID: 702390200564576158}
   - component: {fileID: 363623526518528799}
@@ -105,19 +104,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3826542056422385095}
   m_Enabled: 1
---- !u!114 &4561618668092256012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3826542056422385095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec72980442fddac4d86e75ab24b4d027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sensitivity: 1.5
 --- !u!114 &2957251878330503935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +352,8 @@ GameObject:
   - component: {fileID: 158654563566596079}
   - component: {fileID: 2289766922309244521}
   - component: {fileID: 5276481019024573336}
-  - component: {fileID: 5437037623334663728}
+  - component: {fileID: 6172269600053778954}
+  - component: {fileID: 6766794690222873126}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -441,7 +428,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!114 &5437037623334663728
+--- !u!114 &6172269600053778954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -453,5 +440,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97fca36bd81de7c4cafce7bbf02ca611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprintSpeedMultiplier: 1.5
+  _sprintSpeedMultiplier: 1.75
   _moveSpeed: 150
+--- !u!114 &6766794690222873126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028491757280063157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec72980442fddac4d86e75ab24b4d027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sensitivity: 1.5

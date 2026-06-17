@@ -45,7 +45,7 @@ public class FirstPersonMovement : MonoBehaviour
         Vector3 newVelocity = Vector3.zero;
         
         Transform camera = Camera.main.transform;
-        newVelocity += camera.forward * (_moveVelocity.y * _moveSpeed * Time.fixedDeltaTime);
+        newVelocity += transform.forward * (_moveVelocity.y * _moveSpeed * Time.fixedDeltaTime);
         newVelocity += camera.right * (_moveVelocity.x * _moveSpeed * Time.fixedDeltaTime);
         
         if(_sprinting)

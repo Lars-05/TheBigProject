@@ -27,12 +27,19 @@ public class FirstPersonLook : MonoBehaviour
     
     private void FixedUpdate()
     {
+        Transform camera = Camera.main.transform;
+        Vector3 cameraEulerAngles = camera.eulerAngles;
         Vector3 eulerAngles = transform.eulerAngles;
-
+        
+        camera.rotation =  Quaternion.Euler(
+            cameraEulerAngles.x + -_mouseDelta.y * (_sensitivity * 2) * Time.fixedDeltaTime,
+            cameraEulerAngles.y,
+            cameraEulerAngles.z);
+        
         transform.rotation = Quaternion.Euler(
-            eulerAngles.x + -_mouseDelta.y * (_sensitivity * 2) * Time.fixedDeltaTime,
+            eulerAngles.x,
             eulerAngles.y + _mouseDelta.x * _sensitivity * Time.fixedDeltaTime,
-            0);
+            eulerAngles.z);
     }
 
     private void GetMouseInput(InputAction.CallbackContext context) =>
