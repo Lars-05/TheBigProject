@@ -60,7 +60,6 @@ public class AudioManager : MonoBehaviour
     }
     public static AudioClip GetAudioClip(string soundName)
     {
-        Debug.Log(soundName);
         return _audios[soundName];
     }
     /// ----------
