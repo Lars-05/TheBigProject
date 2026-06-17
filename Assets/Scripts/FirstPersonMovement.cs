@@ -1,44 +1,68 @@
-﻿using System.Collections.Generic;
+﻿
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FirstPersonMovement : MonoBehaviour
 {
-    public float speed = 5;
+    [SerializeField] private float _sprintSpeedMultiplier = 1.25f;
+    [SerializeField] private int _moveSpeed = 5;
+    
+    private bool _sprinting;
 
-    [Header("Running")]
-    public bool canRun = true;
-    public bool IsRunning { get; private set; }
-    public float runSpeed = 9;
-    public KeyCode runningKey = KeyCode.LeftShift;
-
-    Rigidbody rigidbody;
-    /// <summary> Functions to override movement speed. Will use the last added override. </summary>
-    public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
-
-
-
-    void Awake()
+    private Vector2 _moveVelocity;
+    
+    private Rigidbody _rigidbody;
+    
+    private IDisposable _walkSubscription;
+    private IDisposable _stopMoveSubscription;
+    private IDisposable _startSprintSubscription;
+    private IDisposable _endSprintSubscription;
+    
+    private void Awake()
     {
-        // Get the rigidbody on this.
-        rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    private void OnEnable()
     {
-        // Update IsRunning from input.
-        IsRunning = canRun && Input.GetKey(runningKey);
-
-        // Get targetMovingSpeed.
-        float targetMovingSpeed = IsRunning ? runSpeed : speed;
-        if (speedOverrides.Count > 0)
-        {
-            targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
-        }
-
-        // Get targetVelocity from input.
-        Vector2 targetVelocity =new Vector2( Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
-
-        // Apply movement.
-        rigidbody.linearVelocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.linearVelocity.y, targetVelocity.y);
+        _walkSubscription = InputManager.Instance.BindPerformed("Move", Move);
+        _stopMoveSubscription = InputManager.Instance.BindCancelled("Move", StopMove);
+        _startSprintSubscription = InputManager.Instance.BindPerformed("Sprint", StartSprint);
+        _endSprintSubscription = InputManager.Instance.BindCancelled("Sprint", EndSprint);
     }
+
+    private void OnDisable()
+    {
+        _walkSubscription?.Dispose();
+        _stopMoveSubscription?.Dispose();
+        _startSprintSubscription?.Dispose();
+        _endSprintSubscription?.Dispose();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 newVelocity = Vector3.zero;
+        
+        Transform camera = Camera.main.transform;
+        newVelocity += camera.forward * (_moveVelocity.y * _moveSpeed * Time.fixedDeltaTime);
+        newVelocity += camera.right * (_moveVelocity.x * _moveSpeed * Time.fixedDeltaTime);
+        
+        if(_sprinting)
+            newVelocity *= _sprintSpeedMultiplier;
+        
+        _rigidbody.linearVelocity = newVelocity;
+    }
+
+    private void Move(InputAction.CallbackContext context) =>
+        _moveVelocity = context.ReadValue<Vector2>();
+
+    private void StopMove(InputAction.CallbackContext _) =>
+        _moveVelocity = Vector2.zero;
+
+    private void StartSprint(InputAction.CallbackContext _) =>
+        _sprinting = true;
+    
+    private void EndSprint(InputAction.CallbackContext _) =>
+        _sprinting = false;
 }

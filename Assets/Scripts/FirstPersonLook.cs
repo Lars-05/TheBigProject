@@ -1,39 +1,43 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FirstPersonLook : MonoBehaviour
 {
-    [SerializeField]
-    Transform character;
-    public float sensitivity = 2;
-    public float smoothing = 1.5f;
+    [SerializeField] private float _sensitivity = 100f;
+    private Vector2 _mouseDelta;
+    private IDisposable _moveCameraSubscription;
+    private IDisposable _moveCameraStopSubscription;
 
-    Vector2 velocity;
-    Vector2 frameVelocity;
-
-
-    void Reset()
+    private void Start()
     {
-        // Get the character from the FirstPersonMovement in parents.
-        character = GetComponentInParent<FirstPersonMovement>().transform;
-    }
-
-    void Start()
-    {
-        // Lock the mouse cursor to the game screen.
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-    void Update()
+    
+    private void OnEnable()
     {
-        // Get smooth velocity.
-        Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-        Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
-        frameVelocity = Vector2.Lerp(frameVelocity, rawFrameVelocity, 1 / smoothing);
-        velocity += frameVelocity;
-        velocity.y = Mathf.Clamp(velocity.y, -90, 90);
-
-        // Rotate camera up-down and controller left-right from velocity.
-        transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
-        character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+        _moveCameraSubscription = InputManager.Instance.BindPerformed("MoveCamera", GetMouseInput);
+        _moveCameraSubscription = InputManager.Instance.BindCancelled("MoveCamera", StopCameraMove);
     }
+
+    private void OnDisable()
+    {
+        _moveCameraSubscription?.Dispose();
+    }
+    
+    private void FixedUpdate()
+    {
+        Vector3 eulerAngles = transform.eulerAngles;
+
+        transform.rotation = Quaternion.Euler(
+            eulerAngles.x + -_mouseDelta.y * (_sensitivity * 2) * Time.fixedDeltaTime,
+            eulerAngles.y + _mouseDelta.x * _sensitivity * Time.fixedDeltaTime,
+            0);
+    }
+
+    private void GetMouseInput(InputAction.CallbackContext context) =>
+        _mouseDelta = context.ReadValue<Vector2>();
+    
+    private void StopCameraMove(InputAction.CallbackContext _) =>
+        _mouseDelta =  Vector2.zero;
 }
