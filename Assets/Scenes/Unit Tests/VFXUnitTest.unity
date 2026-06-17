@@ -191,9 +191,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 457403284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5cfe809677159642ab4e2fdc604d886, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a55db57a2e8acf479e6fb0efe85f4a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interlacingMaterial: {fileID: 2100000, guid: 5e2ad116d0c85454195a695f29bc42a4, type: 2}
+  defaultIntensity: 0.667
 --- !u!1 &463708456
 GameObject:
   m_ObjectHideFlags: 0
