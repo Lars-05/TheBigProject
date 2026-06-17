@@ -11,6 +11,7 @@ public class SanityManager : MonoBehaviour
 
     [SerializeField] private SanityDisplayer _sanityDisplayer;
     [SerializeField] private int sanityDrainPS = 1;
+    [SerializeField] private int huntSanityDrainPS = 1;
 
     private int sanity;
     private Coroutine drainRoutine;
@@ -42,11 +43,13 @@ public class SanityManager : MonoBehaviour
 
     private IEnumerator DrainSanity()
     {
+
         while (true)
         {
+            int sanityDiff = BurningManAI.isHunting? huntSanityDrainPS: sanityDrainPS;
             yield return new WaitForSeconds(1f);
 
-            DecreaseSanity(sanityDrainPS);
+            DecreaseSanity(sanityDiff);
         }
     }
 

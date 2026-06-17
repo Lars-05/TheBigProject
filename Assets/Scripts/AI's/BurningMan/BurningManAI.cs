@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(WeepingAngleLogic))]
 public class BurningManAI : MonoBehaviour
 {
+    public static bool isHunting { private set; get; } = false;
     [Header("NavMesh")]
     [SerializeField] private NavMeshAgent _navMeshAgent;
 
@@ -29,7 +30,7 @@ public class BurningManAI : MonoBehaviour
     [SerializeField] private float _chaseSpeed = 8f;
     [SerializeField] private float _maxChaseTime = 10f;
     [SerializeField] private float _minDistanceForAttackTarget = 1.5f;
-
+    [SerializeField] private int _sanityLossOnAttack = 20;
     public enum States
     {
         STALKING,
@@ -40,7 +41,7 @@ public class BurningManAI : MonoBehaviour
 
     private float _timeLookedAt;
     private float _timeChasing;
-
+    
     private void Awake()
     {
         if (_navMeshAgent == null)
@@ -123,7 +124,9 @@ public class BurningManAI : MonoBehaviour
 
         if (distanceToTarget <= _minDistanceForAttackTarget)
         {
-            Debug.Log("[BurningManAI]: Attacked");
+            AudioManager.PlaySound("Jumpscare");
+            SanityManager.LoseSanity?.Invoke(_sanityLossOnAttack);
+            StopChase();
         }
 
         if (_timeChasing >= _maxChaseTime)
@@ -139,6 +142,7 @@ public class BurningManAI : MonoBehaviour
 
         _navMeshAgent.speed = _chaseSpeed;
         _navMeshAgent.isStopped = false;
+        isHunting = true;
         AudioManager.PlaySound("BurningManScream");
         Debug.Log("[BurningManAI]: Started chasing");
         
@@ -151,9 +155,9 @@ public class BurningManAI : MonoBehaviour
         _timeLookedAt = 0f;
 
         _navMeshAgent.speed = _stalkSpeed;
-
+        isHunting = false;
         TeleportToRandomPosition();
-
+        
         Debug.Log("[BurningManAI]: Stopped chasing");
     }
 

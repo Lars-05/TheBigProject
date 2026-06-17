@@ -14,7 +14,7 @@ public class CassetteManager : MonoBehaviour
     private AudioClip _cassetteStartAudioClip;
     private AudioClip _cassetteStopAudioClip;
     private AudioClip _cassetteSongAudioClip;
-    
+    private AudioClip _cassetteStaticAudioClip;
     public void Start()
     {
         ConfigureAudioSources();
@@ -35,10 +35,12 @@ public class CassetteManager : MonoBehaviour
     {
         _cassetteAudioSource.clip = _cassetteStartAudioClip;
         _cassetteAudioSource.Play();
+
         yield return new WaitForSeconds(_cassetteStartAudioClip.length);
-        _cassetteAudioSource.Stop();
-        _songAudioSource.Play();
-        InvokeRepeating(nameof(IncreaseSanity), 1,1 );
+
+        _songAudioSource.clip = _cassetteSongAudioClip;
+
+        InvokeRepeating(nameof(IncreaseSanity), 1f, 1f);
     }
     void StopPlaying()
     {
@@ -53,6 +55,8 @@ public class CassetteManager : MonoBehaviour
         _cassetteStartAudioClip = AudioManager.GetAudioClip("CassetteInsert");
         _cassetteStopAudioClip = AudioManager.GetAudioClip("CassetteTakeOut");
         _cassetteSongAudioClip = AudioManager.GetAudioClip("CaliforniaGurls");
+        _cassetteStaticAudioClip = AudioManager.GetAudioClip("Static");
+
         
         _cassetteAudioSource = AudioManager.InterceptSource(_player);
         _cassetteAudioSource.playOnAwake = false;
@@ -66,6 +70,27 @@ public class CassetteManager : MonoBehaviour
 
     private void IncreaseSanity()
     {
+        if (BurningManAI.isHunting)
+        {
+            if (_songAudioSource.clip != _cassetteStaticAudioClip)
+            {
+                _songAudioSource.Stop();
+                _songAudioSource.clip = _cassetteStaticAudioClip;
+                _songAudioSource.Play();
+            }
+            return;
+        }
+
+        if (_songAudioSource.clip != _cassetteSongAudioClip)
+        {
+            _songAudioSource.Stop();
+            _songAudioSource.clip = _cassetteSongAudioClip;
+            _songAudioSource.Play();
+        }
+
+        if (!_songAudioSource.isPlaying)
+            _songAudioSource.Play();
+
         SanityManager.GainSanity?.Invoke(_sanityPerSecond);
     }
     
