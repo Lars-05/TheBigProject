@@ -1,47 +1,51 @@
-using DG.Tweening;
-using Unity.Mathematics.Geometry;
 using UnityEngine;
 using UnityEngine.Rendering;
-
+using UnityEngine.Rendering.Universal;
+using DG.Tweening;
 
 public class VFXManager : MonoBehaviour
 {
-    [SerializeField] private Material interLacingShader;
+    [Header("Shader")]
+    [SerializeField] private Material interlacingMaterial;
+
+    [Header("Volume")]
     [SerializeField] private Volume volume;
-    private UnityEngine.Rendering.Universal.Vignette vignette;
+    private Vignette vignette;
 
     void Awake()
     {
-        for (int i = 0; i < volume.profile.components.Count; i++)
-        {
-            if(volume.profile.components[i].name == "Vignette")
-            {
-                UnityEngine.Rendering.Universal.Vignette vignette = (UnityEngine.Rendering.Universal.Vignette)volume.profile.components[i]; // WHY? why, why must it work like this
-                                                                                                                                      // unity documentation IS SO ASSSSSS
-            }
-        }
+    
+        Set(interlacingMaterial, "_Intensity", 1f, 1f);
     }
+ 
+    public Tween SetFloat(Material mat, string property, float target, float duration)
+        => Set(mat, property, target, duration, false);
+
+    public Tween SetInt(Material mat, string property, int target, float duration)
+        => Set(mat, property, target, duration, true);
     
     
-    
-    void LerpToValue(Material mat, float value, string param, float lerpDuration)
+    public Tween Set(Material mat, string property, float target, float duration, bool isInt = false)
     {
-        if (Shader.Find(param))
-        {
-            Debug.LogError("Cannot find shader");
-        }
-        float progress = 0;
-        float elapsedTime = 0;
-        float targetValue = 0;
-        float myValue = mat.GetFloat(param);
+        if (!mat) return null;
 
-        
-        while (elapsedTime < 1)
-        {
-            Mathf.Lerp(0, value ,progress);
-            elapsedTime += Time.deltaTime / lerpDuration;
-        }
-        mat.SetFloat(param, targetValue );
+        int id = Shader.PropertyToID(property);
+        float start = mat.GetFloat(id);
 
+        return DOTween.To(
+            () => start,
+            x =>
+            {
+                start = x;
+
+                if (isInt)
+                    mat.SetInt(id, Mathf.RoundToInt(x));
+                else
+                    mat.SetFloat(id, x);
+            },
+            target,
+            duration
+        );
     }
+
 }
