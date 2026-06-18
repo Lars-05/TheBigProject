@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(InterlacingShaderEffect))]
 [RequireComponent(typeof(VignettePulsingEffect))]
-public class VFXManagerInstance : MonoBehaviour
+public class VFXManagerBootstrap : MonoBehaviour
 {
     
     private void Awake()

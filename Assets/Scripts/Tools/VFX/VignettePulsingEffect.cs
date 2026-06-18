@@ -1,40 +1,44 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using DG.Tweening;
 using System.Collections;
 
 public class VignettePulsingEffect : MonoBehaviour
 {
-    [SerializeField, Range(0f, 1f)]
-    private float minIntensity;
-
-    [SerializeField, Range(0f, 1f)]
-    private float maxIntensity;
-
-    [SerializeField, Range(0f, 2f)]
-    private float duration;
+    [Header("Pulse Settings")]
+    [SerializeField, Range(0f, 1f)] private float minIntensity = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float maxIntensity = 0.4f;
+    [SerializeField, Range(0.05f, 2f)] private float duration = 0.5f;
 
     private Coroutine pulseRoutine;
     private Vignette vignette;
 
     private void Start()
     {
-        vignette = VFXTool.GetEffect(VFXTool.VFXType.Vignette) as Vignette;
+        vignette = VFXTool.GetEffect<Vignette>();
 
-        if (vignette != null)
-            StartPulsing();
+        if (vignette == null)
+        {
+            Debug.LogError("[VignettePulsingEffect] Vignette not found in Volume Profile.");
+            return;
+        }
+        
     }
 
     public void StartPulsing()
     {
+        if (vignette == null)
+            return;
+
         if (pulseRoutine == null)
             pulseRoutine = StartCoroutine(PulseLoop());
     }
 
     public void SetPulsingParameters(float pMinIntensity, float pMaxIntensity, float pDuration)
     {
-        maxIntensity = pMaxIntensity;
         minIntensity = pMinIntensity;
+        maxIntensity = pMaxIntensity;
         duration = pDuration;
     }
 
@@ -42,21 +46,21 @@ public class VignettePulsingEffect : MonoBehaviour
     {
         while (true)
         {
-            DOTween.To(
-                () => vignette.intensity.value,
-                x => vignette.intensity.value = x,
-                maxIntensity,
-                duration);
+            yield return DOTween.To(
+                    () => vignette.intensity.value,
+                    x => vignette.intensity.value = x,
+                    maxIntensity,
+                    duration)
+                .SetTarget(this)
+                .WaitForCompletion();
 
-            yield return new WaitForSeconds(duration);
-
-            DOTween.To(
-                () => vignette.intensity.value,
-                x => vignette.intensity.value = x,
-                minIntensity,
-                duration);
-
-            yield return new WaitForSeconds(duration);
+            yield return DOTween.To(
+                    () => vignette.intensity.value,
+                    x => vignette.intensity.value = x,
+                    minIntensity,
+                    duration)
+                .SetTarget(this)
+                .WaitForCompletion();
         }
     }
 
@@ -68,6 +72,11 @@ public class VignettePulsingEffect : MonoBehaviour
             pulseRoutine = null;
         }
 
-        DOTween.Kill(vignette);
+        DOTween.Kill(this);
+
+        if (vignette != null)
+        {
+            vignette.intensity.value = minIntensity;
+        }
     }
 }

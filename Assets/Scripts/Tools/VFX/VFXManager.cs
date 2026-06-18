@@ -15,7 +15,11 @@ public static class VFXManager
 
     public static void SetInterlacingStrength(float strength, float duration)
     {
-        interlacingShaderEffect?.SetIntensity(strength, duration);
+        interlacingShaderEffect.SetIntensity(strength, duration);
+    }
+    public static void ResetInterlacingStrength()
+    {
+        interlacingShaderEffect.ResetIntensity();
     }
 
     public static void SetFov(float fov, float duration)
@@ -25,12 +29,13 @@ public static class VFXManager
 
     public static void StartVignettePulse()
     {
-        vignetteController?.StartPulsing();
+        Debug.Log("Starting Vignette Pulse");
+        vignetteController.StartPulsing();
     }
 
     public static void StopVignettePulse()
     {
-        vignetteController?.StopPulsing();
+        vignetteController.StopPulsing();
     }
 
     public static void SetVignettePulsingParameters(
