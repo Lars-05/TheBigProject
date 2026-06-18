@@ -11,7 +11,8 @@ public class Relic : MonoBehaviour, IInteractable
     private Material[] _selectedMaterials;
     private Material[] _defaultMaterials;
 
-    public static UnityEvent OnRelicAdded;
+    public static UnityEvent<int> OnRelicAdded = new();
+    private static int _relicCount;
     
     private void Awake()
     {
@@ -50,6 +51,8 @@ public class Relic : MonoBehaviour, IInteractable
         Cursor.visible = true;
         InputManager.Instance.SwitchActionMap("ObjectView");
         _rotateObject.SetActive(true);
-        OnRelicAdded.Invoke();
+        
+        _relicCount++;
+        OnRelicAdded.Invoke(_relicCount);
     }
 }
