@@ -25,10 +25,17 @@ public class VignettePulsingEffect : MonoBehaviour
             StartPulsing();
     }
 
-    private void StartPulsing()
+    public void StartPulsing()
     {
         if (pulseRoutine == null)
             pulseRoutine = StartCoroutine(PulseLoop());
+    }
+
+    public void SetPulsingParameters(float pMinIntensity, float pMaxIntensity, float pDuration)
+    {
+        maxIntensity = pMaxIntensity;
+        minIntensity = pMinIntensity;
+        duration = pDuration;
     }
 
     private IEnumerator PulseLoop()
@@ -53,7 +60,7 @@ public class VignettePulsingEffect : MonoBehaviour
         }
     }
 
-    private void StopPulsing()
+    public void StopPulsing()
     {
         if (pulseRoutine != null)
         {

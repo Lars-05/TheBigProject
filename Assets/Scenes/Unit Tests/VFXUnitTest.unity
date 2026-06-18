@@ -128,8 +128,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 457403286}
-  - component: {fileID: 457403287}
   - component: {fileID: 457403288}
+  - component: {fileID: 457403287}
+  - component: {fileID: 457403289}
   m_Layer: 0
   m_Name: VFXManager
   m_TagString: Untagged
@@ -181,6 +182,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interlacingMaterial: {fileID: 2100000, guid: 5e2ad116d0c85454195a695f29bc42a4, type: 2}
   defaultIntensity: 0.43
+--- !u!114 &457403289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457403284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43c8a23b2486d14b81fb4609be69ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &463708456
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +328,6 @@ GameObject:
   - component: {fileID: 654495442}
   - component: {fileID: 654495445}
   - component: {fileID: 654495446}
-  - component: {fileID: 654495447}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -457,18 +469,6 @@ MonoBehaviour:
   DefaultRotInfluence: {x: 1, y: 1, z: 1}
   RestPositionOffset: {x: 1, y: 1, z: 0.02}
   RestRotationOffset: {x: 1, y: 1, z: 1}
---- !u!114 &654495447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 654495441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fb1b23d648f41b43b762ccfd8fc4786, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &752435433
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +479,6 @@ GameObject:
   m_Component:
   - component: {fileID: 752435435}
   - component: {fileID: 752435434}
-  - component: {fileID: 752435436}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -519,19 +518,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &752435436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752435433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 817238d9a21d3534db1afba2473ec9fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volume: {fileID: 752435434}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

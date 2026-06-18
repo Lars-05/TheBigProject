@@ -1,51 +1,46 @@
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
-using DG.Tweening;
 
-public class VFXManager : MonoBehaviour
+public static class VFXManager
 {
-    [Header("Shader")]
-    [SerializeField] private Material interlacingMaterial;
+    private static InterlacingShaderEffect interlacingShaderEffect;
+    private static VignettePulsingEffect vignetteController;
 
-    [Header("Volume")]
-    [SerializeField] private Volume volume;
-    private Vignette vignette;
-
-    void Awake()
+    public static void Init(
+        InterlacingShaderEffect interlacing,
+        VignettePulsingEffect vignette)
     {
-    
-        Set(interlacingMaterial, "_Intensity", 1f, 1f);
-    }
- 
-    public Tween SetFloat(Material mat, string property, float target, float duration)
-        => Set(mat, property, target, duration, false);
-
-    public Tween SetInt(Material mat, string property, int target, float duration)
-        => Set(mat, property, target, duration, true);
-    
-    
-    public Tween Set(Material mat, string property, float target, float duration, bool isInt = false)
-    {
-        if (!mat) return null;
-
-        int id = Shader.PropertyToID(property);
-        float start = mat.GetFloat(id);
-
-        return DOTween.To(
-            () => start,
-            x =>
-            {
-                start = x;
-
-                if (isInt)
-                    mat.SetInt(id, Mathf.RoundToInt(x));
-                else
-                    mat.SetFloat(id, x);
-            },
-            target,
-            duration
-        );
+        interlacingShaderEffect = interlacing;
+        vignetteController = vignette;
     }
 
+    public static void SetInterlacingStrength(float strength, float duration)
+    {
+        interlacingShaderEffect?.SetIntensity(strength, duration);
+    }
+
+    public static void SetFov(float fov, float duration)
+    {
+        FovController.SetFov(fov, duration);
+    }
+
+    public static void StartVignettePulse()
+    {
+        vignetteController?.StartPulsing();
+    }
+
+    public static void StopVignettePulse()
+    {
+        vignetteController?.StopPulsing();
+    }
+
+    public static void SetVignettePulsingParameters(
+        float minIntensity,
+        float maxIntensity,
+        float duration)
+    {
+        vignetteController?.SetPulsingParameters(
+            minIntensity,
+            maxIntensity,
+            duration);
+    }
 }
