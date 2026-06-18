@@ -1,16 +1,19 @@
+using EZCameraShake;
 using UnityEngine;
 
 public static class VFXManager
 {
     private static InterlacingShaderEffect interlacingShaderEffect;
     private static VignettePulsingEffect vignetteController;
+    private static CameraShaker _cameraShake;
 
     public static void Init(
         InterlacingShaderEffect interlacing,
-        VignettePulsingEffect vignette)
+        VignettePulsingEffect vignette, CameraShaker cameraShake)
     {
         interlacingShaderEffect = interlacing;
         vignetteController = vignette;
+        _cameraShake = cameraShake;
     }
 
     public static void SetInterlacingStrength(float strength, float duration)
@@ -40,12 +43,13 @@ public static class VFXManager
     
     public static void StartScreenShake(float magnitude, float roughness, float fadeInTime)
     {
+        _cameraShake.enabled = true;
         CameraShakeManager.StartCameraShake(magnitude,  roughness,  fadeInTime);
     }
     
     public static void StopScreenShake(float fadeOutTime)
     {
-        CameraShakeManager.StopCameraShake(fadeOutTime);
+        _cameraShake.enabled = false;
     }
     
     public static void OneShotScreenShake(float magnitude, float roughness, float fadeInTime, float fadeOutTime)

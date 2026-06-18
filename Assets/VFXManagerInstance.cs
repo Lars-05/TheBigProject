@@ -1,4 +1,5 @@
 using System;
+using EZCameraShake;
 using UnityEngine;
 
 [RequireComponent(typeof(InterlacingShaderEffect))]
@@ -11,6 +12,7 @@ public class VFXManagerBootstrap : MonoBehaviour
         // this is why i should be supervised by stan 24/7
         InterlacingShaderEffect interlacingShaderEffect = GetComponent<InterlacingShaderEffect>();
         VignettePulsingEffect vignetteController = GetComponent<VignettePulsingEffect>();
-        VFXManager.Init(interlacingShaderEffect , vignetteController);
+        CameraShaker cameraShake = Camera.main.GetComponentInParent<CameraShaker>();
+        VFXManager.Init(interlacingShaderEffect , vignetteController,  cameraShake);
     }
 }

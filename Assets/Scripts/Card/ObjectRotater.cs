@@ -63,7 +63,7 @@ public class ObjectRotater : MonoBehaviour
             return;
 
         Vector2 mouseDelta = context.ReadValue<Vector2>();
-        _rotateVelocity = mouseDelta * _rotateSpeed * Time.deltaTime;
+        _rotateVelocity = SenstivityManager.mouseSensitivity * mouseDelta * _rotateSpeed * Time.deltaTime;
     }
 
     private void Exit(InputAction.CallbackContext _)
