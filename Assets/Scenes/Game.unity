@@ -1820,6 +1820,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541941945}
   m_CullTransparentMesh: 1
+--- !u!1 &598439925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4549348846820298251, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
+  m_PrefabInstance: {fileID: 7264741435701342122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &598439927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598439925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPosInfluence: {x: 0.05, y: 0.05, z: 0.05}
+  DefaultRotInfluence: {x: 0.05, y: 0.05, z: 0.05}
+  RestPositionOffset: {x: 0, y: 0, z: 0}
+  RestRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &614899207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,12 +2451,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 158106680}
     - target: {fileID: 684815565556427061, guid: 0f09ca803df8a7247809db66f38af3a5, type: 3}
+      propertyPath: _cameraShakeFadeIn
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 684815565556427061, guid: 0f09ca803df8a7247809db66f38af3a5, type: 3}
       propertyPath: _maxTeleportRadius
       value: 125.4
       objectReference: {fileID: 0}
     - target: {fileID: 684815565556427061, guid: 0f09ca803df8a7247809db66f38af3a5, type: 3}
       propertyPath: _minTeleportRadius
       value: 90.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 684815565556427061, guid: 0f09ca803df8a7247809db66f38af3a5, type: 3}
+      propertyPath: _cameraShakeFadeOut
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 684815565556427061, guid: 0f09ca803df8a7247809db66f38af3a5, type: 3}
+      propertyPath: _cameraShakeMagnitude
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 684815565556427061, guid: 0f09ca803df8a7247809db66f38af3a5, type: 3}
+      propertyPath: _cameraShakeRoughness
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 684815565556427061, guid: 0f09ca803df8a7247809db66f38af3a5, type: 3}
       propertyPath: _minDistanceFromTarget
@@ -4632,15 +4669,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 158654563566596079, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 766.194
+      value: 778.8
       objectReference: {fileID: 0}
     - target: {fileID: 158654563566596079, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000030517578
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 158654563566596079, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 202.603
+      value: 364.5
       objectReference: {fileID: 0}
     - target: {fileID: 158654563566596079, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4681,7 +4718,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4549348846820298251, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 598439927}
   m_SourcePrefab: {fileID: 100100000, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

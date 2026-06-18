@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -31,6 +32,12 @@ public class BurningManAI : MonoBehaviour
     [SerializeField] private float _maxChaseTime = 10f;
     [SerializeField] private float _minDistanceForAttackTarget = 1.5f;
     [SerializeField] private int _sanityLossOnAttack = 20;
+
+    [Header("VFX")] 
+    [SerializeField] private float _cameraShakeRoughness;
+    [SerializeField] private float _cameraShakeMagnitude;
+    [SerializeField] private float _cameraShakeFadeOut;
+    [SerializeField] private float _cameraShakeFadeIn;
     public enum States
     {
         STALKING,
@@ -143,16 +150,27 @@ public class BurningManAI : MonoBehaviour
         _navMeshAgent.speed = _chaseSpeed;
         _navMeshAgent.isStopped = false;
         isHunting = true;
-        AudioManager.PlaySound("BurningManScream");
-        VFXManager.StartVignettePulse();
-        VFXManager.SetFov(90,1);
+
+        StartCoroutine(ChaseFX());
         VFXManager.SetInterlacingStrength(0.6f, 2);
+        VFXManager.OneShotScreenShake(_cameraShakeMagnitude, _cameraShakeRoughness, _cameraShakeFadeIn, _cameraShakeFadeOut);
         Debug.Log("[BurningManAI]: Started chasing");
+    }
+
+    IEnumerator ChaseFX()
+    {
+        VFXManager.StartScreenShake(_cameraShakeMagnitude,_cameraShakeRoughness,_cameraShakeFadeIn);
+        AudioManager.PlaySound("BurningManScream");
+        VFXManager.SetFov(90,1);
+        VFXManager.StartVignettePulse();
+        VFXManager.SetInterlacingStrength(0.6f, 2);
+        yield return new WaitForSeconds(AudioManager.GetAudioClip("BurningManScream").length);
+        VFXManager.StopScreenShake(_cameraShakeFadeOut);
+
     }
 
     private void StopChase()
     {
-        
         VFXManager.StopVignettePulse();
         VFXManager.ResetInterlacingStrength();
         VFXManager.SetFov(60,1);
