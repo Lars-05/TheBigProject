@@ -6,33 +6,37 @@ public class FirstPersonLook : MonoBehaviour
 {
     [SerializeField] private float _sensitivity = 100f;
     private Vector2 _mouseDelta;
+    private Transform _cameraTransform;
+    private float _pitch;
+    
     private IDisposable _moveCameraSubscription;
     private IDisposable _moveCameraStopSubscription;
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+    private void Awake() =>
+        _cameraTransform = Camera.main.transform;
     
+    private void Start() =>
+        Cursor.lockState = CursorLockMode.Locked;
+
     private void OnEnable()
     {
         _moveCameraSubscription = InputManager.Instance.BindPerformed("MoveCamera", GetMouseInput);
         _moveCameraSubscription = InputManager.Instance.BindCancelled("MoveCamera", StopCameraMove);
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() =>
         _moveCameraSubscription?.Dispose();
-    }
     
     private void FixedUpdate()
     {
-        Transform camera = Camera.main.transform;
-        Vector3 cameraEulerAngles = camera.eulerAngles;
+        Vector3 cameraEulerAngles = _cameraTransform.eulerAngles;
         Vector3 eulerAngles = transform.eulerAngles;
         
-        camera.rotation =  Quaternion.Euler(
-            cameraEulerAngles.x + -_mouseDelta.y * (_sensitivity * 2) * Time.fixedDeltaTime,
+        _pitch += -_mouseDelta.y * _sensitivity * Time.fixedDeltaTime;
+        _pitch = Mathf.Clamp(_pitch, -90f, 90f);
+        
+        _cameraTransform.rotation =  Quaternion.Euler(
+            _pitch,
             cameraEulerAngles.y,
             cameraEulerAngles.z);
         
