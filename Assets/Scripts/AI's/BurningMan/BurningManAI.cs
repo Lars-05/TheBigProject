@@ -144,12 +144,18 @@ public class BurningManAI : MonoBehaviour
         _navMeshAgent.isStopped = false;
         isHunting = true;
         AudioManager.PlaySound("BurningManScream");
+        VFXManager.StartVignettePulse();
+        VFXManager.SetFov(90,1);
+        VFXManager.SetInterlacingStrength(0.6f, 2);
         Debug.Log("[BurningManAI]: Started chasing");
-        
     }
 
     private void StopChase()
     {
+        
+        VFXManager.StopVignettePulse();
+        VFXManager.ResetInterlacingStrength();
+        VFXManager.SetFov(60,1);
         _currentState = States.STALKING;
         _timeChasing = 0f;
         _timeLookedAt = 0f;
