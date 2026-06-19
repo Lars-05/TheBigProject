@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
 
     public void OpenMenu()
     {
+        AudioListener.pause = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         menuContent.SetActive(true);
@@ -22,6 +23,7 @@ public class MenuManager : MonoBehaviour
 
     public void CloseMenu()
     {
+        AudioListener.pause = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         menuContent.SetActive(false);
