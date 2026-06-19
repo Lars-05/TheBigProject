@@ -19,11 +19,12 @@ public class PassOutDisplayer : MonoBehaviour
         EventBus.OnPlayerPassedOut -= SetPassOutUI;
     }
 
-    private void SetPassOutUI()
+    public void SetPassOutUI()
     {
         _passOutUI.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
     }
     
 }

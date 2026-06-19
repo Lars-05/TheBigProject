@@ -13,6 +13,7 @@ public class SanityManager : MonoBehaviour
     [SerializeField] private int sanityDrainPS = 1;
     [SerializeField] private int huntSanityDrainPS = 1;
 
+    private bool isDead;
     private int sanity;
     private Coroutine drainRoutine;
 
@@ -61,12 +62,16 @@ public class SanityManager : MonoBehaviour
 
     public void DecreaseSanity(int amount)
     {
+        if(isDead)
+            return;
+        
         sanity -= amount;
         sanity = Mathf.Max(0, sanity);
         _sanityDisplayer.UpdateSlider(sanity);
         if (sanity == 0)
         {
             EventBus.RaiseOnPlayerPassedOut();
+            isDead = true;
         }
     }
 }

@@ -4757,10 +4757,10 @@ Transform:
   - {fileID: 1888272470}
   - {fileID: 270301612}
   - {fileID: 195914663}
-  - {fileID: 862190377}
   - {fileID: 10964785}
   - {fileID: 41593004}
   - {fileID: 1465302080}
+  - {fileID: 862190377}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1853559542
@@ -5257,7 +5257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1975650635
 Transform:
   m_ObjectHideFlags: 0
