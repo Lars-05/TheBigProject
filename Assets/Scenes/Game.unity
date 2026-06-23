@@ -1124,6 +1124,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Relic
       objectReference: {fileID: 0}
+    - target: {fileID: 8264764318481638075, guid: 3d101e1864f494d1b9a6458788c20071, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 158106680}
+    - target: {fileID: 8264764318481638075, guid: 3d101e1864f494d1b9a6458788c20071, type: 3}
+      propertyPath: _interactionDistance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5847,6 +5855,10 @@ PrefabInstance:
     - target: {fileID: 2957251878330503935, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276481019024573336, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 8028491757280063157, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_Name
