@@ -10,7 +10,7 @@ public class VignettePulsingEffect : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float minIntensity = 0.1f;
     [SerializeField, Range(0f, 1f)] private float maxIntensity = 0.4f;
     [SerializeField, Range(0.05f, 2f)] private float duration = 0.5f;
-
+    [SerializeField] private bool pulseOnAwake = false;
     private Coroutine pulseRoutine;
     private Vignette vignette;
 
@@ -23,7 +23,10 @@ public class VignettePulsingEffect : MonoBehaviour
             Debug.LogError("[VignettePulsingEffect] Vignette not found in Volume Profile.");
             return;
         }
-        
+
+        if (pulseOnAwake)
+            StartPulsing();
+
     }
 
     public void StartPulsing()
@@ -32,7 +35,16 @@ public class VignettePulsingEffect : MonoBehaviour
             return;
 
         if (pulseRoutine == null)
-            pulseRoutine = StartCoroutine(PulseLoop());
+            pulseRoutine = StartCoroutine(PulseLoop(minIntensity, maxIntensity, duration));
+    }
+    
+    public void StartPulsing(float pMinIntensity, float pMaxIntensity, float pDuration)
+    {
+        if (vignette == null)
+            return;
+
+        if (pulseRoutine == null)
+            pulseRoutine = StartCoroutine(PulseLoop( pMinIntensity, pMaxIntensity,pDuration));
     }
 
     public void SetPulsingParameters(float pMinIntensity, float pMaxIntensity, float pDuration)
@@ -42,23 +54,23 @@ public class VignettePulsingEffect : MonoBehaviour
         duration = pDuration;
     }
 
-    private IEnumerator PulseLoop()
+    private IEnumerator PulseLoop(float pMinIntensity, float pMaxIntensity, float pDuration)
     {
         while (true)
         {
             yield return DOTween.To(
                     () => vignette.intensity.value,
                     x => vignette.intensity.value = x,
-                    maxIntensity,
-                    duration)
+                    pMaxIntensity,
+                    pDuration)
                 .SetTarget(this)
                 .WaitForCompletion();
 
             yield return DOTween.To(
                     () => vignette.intensity.value,
                     x => vignette.intensity.value = x,
-                    minIntensity,
-                    duration)
+                    pMinIntensity,
+                    pDuration)
                 .SetTarget(this)
                 .WaitForCompletion();
         }

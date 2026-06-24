@@ -3,8 +3,8 @@ using UnityEngine;
 
 public static class VFXManager
 {
-    private static InterlacingShaderEffect interlacingShaderEffect;
-    private static VignettePulsingEffect vignetteController;
+    public static InterlacingShaderEffect interlacingShaderEffect { private set; get;}
+    public static VignettePulsingEffect vignetteController { private set; get;}
     private static CameraShaker _cameraShake;
 
     public static void Init(

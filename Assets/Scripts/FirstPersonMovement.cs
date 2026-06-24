@@ -7,7 +7,7 @@ public class FirstPersonMovement : MonoBehaviour
 {
     [SerializeField] private float _sprintSpeedMultiplier = 1.25f;
     [SerializeField] private int _moveSpeed = 5;
-    
+
     private bool _sprinting;
 
     private Vector2 _moveVelocity;
@@ -42,6 +42,9 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(SanityManager.isDead)
+            return;
+        
         Vector3 newVelocity = Vector3.zero;
         
         Transform camera = Camera.main.transform;

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class FirstPersonLook : MonoBehaviour
 {
-    [SerializeField] private float _sensitivity = 100f;
+
     private Vector2 _mouseDelta;
     private Transform _cameraTransform;
     private float _pitch;
@@ -29,10 +29,13 @@ public class FirstPersonLook : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if(SanityManager.isDead)
+            return;
+        
         Vector3 cameraEulerAngles = _cameraTransform.eulerAngles;
         Vector3 eulerAngles = transform.eulerAngles;
         
-        _pitch += -_mouseDelta.y * _sensitivity * Time.fixedDeltaTime;
+        _pitch += -_mouseDelta.y *  SenstivityManager.mouseSensitivity * 10 * Time.fixedDeltaTime;
         _pitch = Mathf.Clamp(_pitch, -90f, 90f);
         
         _cameraTransform.rotation =  Quaternion.Euler(
@@ -42,7 +45,7 @@ public class FirstPersonLook : MonoBehaviour
         
         transform.rotation = Quaternion.Euler(
             eulerAngles.x,
-            eulerAngles.y + _mouseDelta.x * _sensitivity * Time.fixedDeltaTime,
+            eulerAngles.y + _mouseDelta.x * SenstivityManager.mouseSensitivity * 10 * Time.fixedDeltaTime,
             eulerAngles.z);
     }
 

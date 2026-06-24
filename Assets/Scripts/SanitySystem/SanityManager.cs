@@ -8,17 +8,19 @@ public class SanityManager : MonoBehaviour
 
     public static SanityDisplayerEvent GainSanity;
     public static SanityDisplayerEvent LoseSanity;
+    public static bool isDead;
 
     [SerializeField] private SanityDisplayer _sanityDisplayer;
     [SerializeField] private int sanityDrainPS = 1;
     [SerializeField] private int huntSanityDrainPS = 1;
 
-    private bool isDead;
+    
     private int sanity;
     private Coroutine drainRoutine;
 
     private void OnEnable()
     {
+        isDead = false;
         GainSanity += IncreaseSanity;
         LoseSanity += DecreaseSanity;
 

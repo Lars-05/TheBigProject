@@ -33,6 +33,7 @@ public class CassetteManager : MonoBehaviour
    
     private IEnumerator StartUpCassette()
     {
+        
         _cassetteAudioSource.clip = _cassetteStartAudioClip;
         _cassetteAudioSource.Play();
 
@@ -70,6 +71,13 @@ public class CassetteManager : MonoBehaviour
 
     private void IncreaseSanity()
     {
+        if (SanityManager.isDead)
+        {
+            _songAudioSource.Stop();
+            return;
+        }
+
+        
         if (BurningManAI.isHunting)
         {
             if (_songAudioSource.clip != _cassetteStaticAudioClip)
@@ -96,6 +104,8 @@ public class CassetteManager : MonoBehaviour
     
     private void Play(InputAction.CallbackContext _)
     {
+        if (SanityManager.isDead)
+            return;
         OnCassettePlayerButtonClicked();
     }
 
