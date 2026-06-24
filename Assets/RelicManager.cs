@@ -13,7 +13,7 @@ public class RelicManager : MonoBehaviour
     {
         if (relicCount >= _relicsNeeded)
         {
-            //win i guess
+            Debug.Log("OMGOSH HIIIIIIIIIIIIII BENBIL IN AM THE WIN CONDITION THAT WORKS");
         }
     }
     
