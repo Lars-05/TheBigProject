@@ -37,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Enable: 1
+    - _Enable: 0
     - _Intensity: 0.6
     - _NoiseScale: -11.88
     - _Speed: 0.02

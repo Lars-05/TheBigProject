@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 4534264641828652}
   - component: {fileID: 205477677417311662}
   - component: {fileID: 136397860403507302}
+  - component: {fileID: 8975506975268324066}
   m_Layer: 0
   m_Name: PF Conifer Bare BOTD URP
   m_TagString: Untagged
@@ -338,6 +339,22 @@ CapsuleCollider:
   m_Height: 6
   m_Direction: 1
   m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!208 &8975506975268324066
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743353957770956}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.38, y: 1, z: 0.38}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4479439674103408020
 GameObject:
   m_ObjectHideFlags: 0
