@@ -29,6 +29,9 @@ public class FirstPersonLook : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if(SanityManager.isDead)
+            return;
+        
         Vector3 cameraEulerAngles = _cameraTransform.eulerAngles;
         Vector3 eulerAngles = transform.eulerAngles;
         

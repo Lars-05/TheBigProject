@@ -11,37 +11,58 @@ public class PassOut : MonoBehaviour
     
     [Header("Signal Lost Text")]
     [SerializeField] private TextMeshProUGUI signalLostText;
+
+    [Header("Player")] 
+    [SerializeField] private GameObject player;
     
-    [Header("Animation")]
-    [SerializeField] private Animator _animator;
+    [Header("Animation")] 
     [SerializeField] private AnimationClip passOutAnimation;
     private MeshRenderer  _meshRenderer;
+    private Animator _animator;
     
     [Header("Fade Out")]
     [SerializeField] private float fadeOutDuration;
     [SerializeField] private CanvasGroup canvasGroup;
 
     private AudioListener listener;
+    
+  
+    private void OnEnable()
+    {
+        EventBus.OnPlayerPassedOut += StartCoroutine;
+    }
+
+    private void OnDisable()
+    {
+        EventBus.OnPlayerPassedOut -= StartCoroutine;
+    }
+
     private void Awake()
     {
-        _meshRenderer = GetComponent<MeshRenderer>();
+        _animator = player.GetComponentInChildren<Animator>();
         listener = Camera.main.GetComponent<AudioListener>();
         canvasGroup.alpha = 0;
         signalLostText.gameObject.SetActive(false);
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
+    }
+
+    private void StartCoroutine()
+    {
         StartCoroutine(PassOutCoroutine());
     }
 
 
     public IEnumerator PassOutCoroutine()
     {
+        player.GetComponent<FirstPersonMovement>().enabled = false;
+        player.GetComponent<FirstPersonLook>().enabled = false;
         canvasGroup.gameObject.SetActive(true);
         AudioManager.PlaySound("DeathStatic");
         signalLostText.gameObject.SetActive(true);
         
         _animator.Play(passOutAnimation.name);
-        _meshRenderer.enabled = false;
+ 
         
         VFXManager.interlacingShaderEffect.SetIntensity(1, passOutAnimation.length);
         VFXManager.vignetteController.StartPulsing(
