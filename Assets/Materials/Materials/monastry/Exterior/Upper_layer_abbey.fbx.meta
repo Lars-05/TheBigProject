@@ -3,7 +3,22 @@ guid: 13ef0e8c06db5a4468d8da92c7a53577
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bell_Arch
+    second: {fileID: 2100000, guid: fe9ce49bfac990c4fb36049f36125751, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Top_tower
+    second: {fileID: 2100000, guid: 581434581b0af234f922a8353dec991b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window_Door
+    second: {fileID: 2100000, guid: 146a07eba4a38c3448da145260f71836, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

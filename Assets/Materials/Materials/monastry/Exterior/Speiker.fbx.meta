@@ -3,7 +3,17 @@ guid: ffeccb730998b864ebad57baa155b96f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Speiker
+    second: {fileID: 2100000, guid: 2afce3dff3bac9a4bab1028796d08b26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Speiker_Roof
+    second: {fileID: 2100000, guid: f10c3d15c2e2c9e45a8a45eb3b2fa6e4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

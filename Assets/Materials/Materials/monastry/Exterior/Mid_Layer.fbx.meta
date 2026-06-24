@@ -3,7 +3,32 @@ guid: 2d31b4d7acf269e498cc71292d681972
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mid_abbey_Roof
+    second: {fileID: 2100000, guid: f22e7f67fcc641143b24a79f651fd56b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mid_abbey_Roof_top
+    second: {fileID: 2100000, guid: c9082f3ba2bf05e40815cc4f64d0b4c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mid_abbey_cyclinder
+    second: {fileID: 2100000, guid: d2850c35747e9ac4eb2c2e1c9ee5ca63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Top_tower
+    second: {fileID: 2100000, guid: dfd212d378424fe4c849299e098829a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window_Door
+    second: {fileID: 2100000, guid: b617990995001934aafb041ac52ff7cb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

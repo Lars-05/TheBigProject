@@ -3,7 +3,37 @@ guid: 3374cb99d9a41244395ee52e0141be5f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BIG_WINDOW_BACK
+    second: {fileID: 2100000, guid: 51c7302511b52e14d8d5e81b574d3cb6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Big_Abbey_1
+    second: {fileID: 2100000, guid: 382215c53bb372a42b58ff0869978d3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Top_tower
+    second: {fileID: 2100000, guid: 25d0a4ff8077f104b8c826d7299049b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window_Door
+    second: {fileID: 2100000, guid: 286621ea32617b74083ba864ba216d82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: round_window_big
+    second: {fileID: 2100000, guid: 5c58d59cd6abc334aaef90923fa211af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: round_window_small
+    second: {fileID: 2100000, guid: 8eb0111691416114686e961e3bda0f05, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

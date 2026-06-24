@@ -3,7 +3,22 @@ guid: 36716416e3576774b99507c7d3b85d64
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Medium_Abbey_1
+    second: {fileID: 2100000, guid: 94df1c40da929f74ca29db5539449cfa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Side_Abbey_1
+    second: {fileID: 2100000, guid: a33930c345f9b014d976641d5b5a0851, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: windows_2
+    second: {fileID: 2100000, guid: a76caeba8e6295647864467319afaf01, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

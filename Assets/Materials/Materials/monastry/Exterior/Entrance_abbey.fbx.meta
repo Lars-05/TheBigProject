@@ -3,7 +3,17 @@ guid: 745853f59455a9d4f9e12f666de4a08b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bell_Arch
+    second: {fileID: 2100000, guid: ed525aa963178d84db61b8a30b0cc863, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Entrance1
+    second: {fileID: 2100000, guid: c3aa0b1c44de2284ca5a19f805962d22, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
