@@ -336,6 +336,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf87a743ffd8ae42b64228472152dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minIntensity: 0.4
+  maxIntensity: 0.6
+  duration: 0.5
+  signalLostText: {fileID: 0}
+  player: {fileID: 0}
+  passOutAnimation: {fileID: 0}
+  fadeOutDuration: 0
+  canvasGroup: {fileID: 0}
 --- !u!95 &973690350
 Animator:
   serializedVersion: 7
