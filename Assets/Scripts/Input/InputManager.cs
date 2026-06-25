@@ -22,6 +22,8 @@ public class InputManager : MonoBehaviour
 
     public IDisposable BindPerformed(string actionName, Action<InputAction.CallbackContext> callback)
     {
+
+        
         InputAction inputAction = GetAction(actionName);
 
         inputAction.performed += callback;

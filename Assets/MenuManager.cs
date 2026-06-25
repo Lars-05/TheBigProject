@@ -29,7 +29,6 @@ public class MenuManager : MonoBehaviour
         menuContent.SetActive(false);
         Time.timeScale = 1;
         menuOpen = false;
-
     }
     
     private void OpenMenu(InputAction.CallbackContext _)
