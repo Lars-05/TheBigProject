@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2957251878330503935}
   - component: {fileID: 702390200564576158}
   - component: {fileID: 363623526518528799}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: First Person Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1632820953687131959}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 206406779650173688}
   - component: {fileID: 1570653478258978953}
   - component: {fileID: 2630312707855978810}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1083838915125058663}
   - component: {fileID: 1920578770805035362}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bob / Sway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 5276481019024573336}
   - component: {fileID: 6172269600053778954}
   - component: {fileID: 6766794690222873126}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,6 +442,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprintSpeedMultiplier: 1.75
   _moveSpeed: 150
+  _playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &6766794690222873126
 MonoBehaviour:
   m_ObjectHideFlags: 0
