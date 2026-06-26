@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class FirstPersonMovement : MonoBehaviour
 {
-    [SerializeField] private float _sprintSpeedMultiplier = 1.25f;
+    [SerializeField] private float _sprintSpeedMultiplier = 1.75f;
     [SerializeField] private int _moveSpeed = 5;
 
     private bool _sprinting;
@@ -57,6 +57,15 @@ public class FirstPersonMovement : MonoBehaviour
         _rigidbody.linearVelocity = newVelocity;
     }
 
+    public void SpeedBoost()
+    {
+        _sprintSpeedMultiplier = 2.25f;
+        Invoke(nameof(StopSpeedBoost), 5);
+    }
+    
+    private void StopSpeedBoost() =>
+        _sprintSpeedMultiplier = 1.75f;
+    
     private void Move(InputAction.CallbackContext context) =>
         _moveVelocity = context.ReadValue<Vector2>();
 
