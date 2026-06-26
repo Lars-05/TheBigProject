@@ -1,22 +1,19 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Relic : MonoBehaviour, IInteractable
 {
+    public static UnityEvent<int> OnRelicAdded = new();
+    private static int _relicCount;
+    
     [SerializeField] private Material _selectedMaterial;
     [SerializeField] private GameObject _rotateObject;
     [SerializeField] private MeshRenderer _renderer;
-    [SerializeField] private GameObject _player;
-    [SerializeField] private float _interactionDistance;
 
     private Material[] _defaultMaterials;
     private Material[] _selectedMaterials;
 
     private bool _collected;
-
-    public static UnityEvent<int> OnRelicAdded = new();
-    private static int _relicCount;
 
     private void Awake()
     {
@@ -39,14 +36,9 @@ public class Relic : MonoBehaviour, IInteractable
         _selectedMaterials[^1] = _selectedMaterial;
     }
 
-    private bool PlayerInRange()
-    {
-        return Vector3.Distance(_player.transform.position, _renderer.bounds.center) < _interactionDistance;
-    }
-
     public void OnHoverEnter()
     {
-        if (_renderer != null && PlayerInRange())
+        if (_renderer != null)
             _renderer.materials = _selectedMaterials;
     }
 
@@ -58,17 +50,11 @@ public class Relic : MonoBehaviour, IInteractable
 
     public void OnHoverStay()
     {
-        if(PlayerInRange())
-        {
-            OnHoverEnter();
-        }
+        OnHoverEnter();
     }
 
     public void OnInteract()
     {
-        if (!PlayerInRange())
-            return;
-            
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -83,11 +69,5 @@ public class Relic : MonoBehaviour, IInteractable
             _relicCount++;
             OnRelicAdded.Invoke(_relicCount);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.transform.position, _interactionDistance);
     }
 }

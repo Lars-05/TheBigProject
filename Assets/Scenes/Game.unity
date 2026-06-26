@@ -23195,12 +23195,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5276481019024573336, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276481019024573336, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 6172269600053778954, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: _moveSpeed
       value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172269600053778954, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
+      propertyPath: _gravityMultiplier
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6172269600053778954, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: _sprintSpeedMultiplier
