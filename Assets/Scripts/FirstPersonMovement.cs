@@ -44,9 +44,13 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(SanityManager.isDead)
+        if (SanityManager.isDead)
+        {
+            _rigidbody.linearVelocity = Vector3.zero;
+            _rigidbody.Sleep();
             return;
-        
+        }
+
         Vector3 newVelocity = Vector3.zero;
         
         Transform camera = Camera.main.transform;

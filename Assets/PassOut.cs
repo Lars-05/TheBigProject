@@ -39,13 +39,13 @@ public class PassOut : MonoBehaviour
 
     private void Start()
     {
-        _animator = player.GetComponentInChildren<Animator>();
+        _animator = player.GetComponent<Animator>();
+        _animator.enabled = false;
         listener = Camera.main.GetComponent<AudioListener>();
         canvasGroup.alpha = 0;
         signalLostText.gameObject.SetActive(false);
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
-        StartCoroutine();
     }
 
     private void StartCoroutine()
@@ -56,11 +56,12 @@ public class PassOut : MonoBehaviour
 
     public IEnumerator PassOutCoroutine()
     {
+        _animator.enabled = true;
         SanityManager.isDead = true;
         canvasGroup.gameObject.SetActive(true);
         AudioManager.PlaySound("DeathStatic");
         signalLostText.gameObject.SetActive(true);
-        
+    
         _animator.Play(passOutAnimation.name);
  
         
