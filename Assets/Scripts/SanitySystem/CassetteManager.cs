@@ -41,10 +41,12 @@ public class CassetteManager : MonoBehaviour
 
         _songAudioSource.clip = _cassetteSongAudioClip;
 
+        EventBus.RaiseOnCassetteStarted();
         InvokeRepeating(nameof(IncreaseSanity), 1f, 1f);
     }
     void StopPlaying()
     {
+        EventBus.RaiseOnCassetteStopped();
         CancelInvoke(nameof(IncreaseSanity));
         _songAudioSource.Pause();
         _cassetteAudioSource.clip = _cassetteStopAudioClip;
