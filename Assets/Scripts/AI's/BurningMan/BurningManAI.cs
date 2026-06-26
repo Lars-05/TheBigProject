@@ -50,6 +50,8 @@ public class BurningManAI : MonoBehaviour
     [SerializeField] private float _cameraShakeMagnitude;
     [SerializeField] private float _cameraShakeFadeOut;
     [SerializeField] private float _cameraShakeFadeIn;
+
+    private AudioSource _fireAudioSource;
     public enum States
     {
         STALKING,
@@ -75,7 +77,9 @@ public class BurningManAI : MonoBehaviour
     {
         _currentState = States.STALKING;
         _navMeshAgent.speed = _stalkSpeed;
-
+        _fireAudioSource = AudioManager.InterceptSource(this.gameObject);
+        _fireAudioSource.loop = true;
+        _fireAudioSource.clip = AudioManager.GetAudioClip("OnFire");
         TeleportToRandomPosition();
     }
 
@@ -134,7 +138,6 @@ public class BurningManAI : MonoBehaviour
 
     private void HandleChasing()
     {
-        
         _animator.Play(_runningAnimation.name);
         _timeChasing += Time.deltaTime;
         _navMeshAgent.speed = _chaseSpeed;
@@ -163,6 +166,7 @@ public class BurningManAI : MonoBehaviour
 
     private void StartChase()
     {
+        _fireAudioSource.Play();
         _currentState = States.CHASING;
         _timeChasing = 0f;
         
@@ -181,7 +185,7 @@ public class BurningManAI : MonoBehaviour
     {
         
         _fxHolder.SetActive(true);
-        AudioManager.PlaySound("OnFire");
+   
         VFXManager.StartScreenShake(_cameraShakeMagnitude,_cameraShakeRoughness,_cameraShakeFadeIn);
         AudioManager.PlaySound("BurningManScream");
         VFXManager.SetFov(90,1);
@@ -194,7 +198,7 @@ public class BurningManAI : MonoBehaviour
 
     private void StopChase()
     {
-        
+        _fireAudioSource.Stop();
         _fxHolder.SetActive(false);
         _animator.Play(_idleAnimation.name);
         VFXManager.StopVignettePulse();
