@@ -21,6 +21,18 @@ public class BurningManAI : MonoBehaviour
     [SerializeField] private float _maxTeleportRadius = 25f;
     [SerializeField] private float _navMeshSampleRadius = 5f;
 
+    [Header("Animator")]
+    [SerializeField] private Animator _animator;
+    
+    [Header("Animation Clips")]
+    [SerializeField] private AnimationClip _walkingAnimation;
+    [SerializeField] private AnimationClip _runningAnimation;
+    [SerializeField] private AnimationClip _attackingAnimation;
+    [SerializeField] private AnimationClip _idleAnimation;
+    
+    [Header("FX")]
+    [SerializeField] private GameObject _fxHolder;
+    
     [Header("Stalk Stats")]
     [SerializeField] private float _stalkSpeed = 3.5f;
     [SerializeField] private float _minDistanceFromTarget = 5f;
@@ -51,6 +63,7 @@ public class BurningManAI : MonoBehaviour
     
     private void Awake()
     {
+        _fxHolder.SetActive(false);
         if (_navMeshAgent == null)
             _navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -94,11 +107,12 @@ public class BurningManAI : MonoBehaviour
         {
             _timeLookedAt += Time.deltaTime;
             _navMeshAgent.isStopped = true;
-
+            _animator.Play(_idleAnimation.name);
             Debug.Log("[BurningManAI]: Looked at for: " + _timeLookedAt + " seconds");
         }
         else
         {
+            _animator.Play(_walkingAnimation.name);
             _timeLookedAt = Mathf.Max(
                 0f,
                 _timeLookedAt - Time.deltaTime * _lookAwayCooldownRate
@@ -120,8 +134,9 @@ public class BurningManAI : MonoBehaviour
 
     private void HandleChasing()
     {
+        
+        _animator.Play(_runningAnimation.name);
         _timeChasing += Time.deltaTime;
-
         _navMeshAgent.speed = _chaseSpeed;
         _navMeshAgent.isStopped = false;
 
@@ -141,6 +156,7 @@ public class BurningManAI : MonoBehaviour
 
         if (_timeChasing >= _maxChaseTime)
         {
+            AudioManager.PlaySound("Breath");
             StopChase();
         }
     }
@@ -149,7 +165,8 @@ public class BurningManAI : MonoBehaviour
     {
         _currentState = States.CHASING;
         _timeChasing = 0f;
-
+        
+   
         _navMeshAgent.speed = _chaseSpeed;
         _navMeshAgent.isStopped = false;
         isHunting = true;
@@ -162,6 +179,9 @@ public class BurningManAI : MonoBehaviour
 
     IEnumerator ChaseFX()
     {
+        
+        _fxHolder.SetActive(true);
+        AudioManager.PlaySound("OnFire");
         VFXManager.StartScreenShake(_cameraShakeMagnitude,_cameraShakeRoughness,_cameraShakeFadeIn);
         AudioManager.PlaySound("BurningManScream");
         VFXManager.SetFov(90,1);
@@ -174,6 +194,9 @@ public class BurningManAI : MonoBehaviour
 
     private void StopChase()
     {
+        
+        _fxHolder.SetActive(false);
+        _animator.Play(_idleAnimation.name);
         VFXManager.StopVignettePulse();
         VFXManager.ResetInterlacingStrength();
         VFXManager.SetFov(60,1);
