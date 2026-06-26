@@ -12,6 +12,6 @@ public class RelicUI : MonoBehaviour
     
     private void IncrementRelicText(int amount)
     {
-        _text.text = amount.ToString();
+        _text.text = $"{amount.ToString()}/3";
     }
 }
