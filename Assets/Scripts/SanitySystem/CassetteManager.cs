@@ -34,6 +34,7 @@ public class CassetteManager : MonoBehaviour
     private IEnumerator StartUpCassette()
     {
         
+        EventBus.RaiseOnCassetteStarted();
         _cassetteAudioSource.clip = _cassetteStartAudioClip;
         _cassetteAudioSource.Play();
 
@@ -41,7 +42,7 @@ public class CassetteManager : MonoBehaviour
 
         _songAudioSource.clip = _cassetteSongAudioClip;
 
-        EventBus.RaiseOnCassetteStarted();
+
         InvokeRepeating(nameof(IncreaseSanity), 1f, 1f);
     }
     void StopPlaying()
