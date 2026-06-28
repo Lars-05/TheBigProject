@@ -35,7 +35,13 @@ public class AudioManager : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(_audios[soundName], position);
     }
-    
+
+    public static void PlaySound(string soundName, Vector3 position, bool ignoreListenerPause)
+    {
+        _sfx.ignoreListenerPause = ignoreListenerPause;
+        _sfx.PlayOneShot(_audios[soundName]);
+    }
+
     public static void PlaySound(string soundName, GameObject gameObject)
     {
         AudioSource source = gameObject.AddComponent<AudioSource>();

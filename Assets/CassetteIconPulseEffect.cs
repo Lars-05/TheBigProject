@@ -18,9 +18,6 @@ public class CassetteIconPulseEffect : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private bool loop = true;
 
-    private Tween colorTween;
-    private Tween scaleTween;
-
     private Vector3 baseScale;
     private bool isActive;
 
@@ -30,59 +27,70 @@ public class CassetteIconPulseEffect : MonoBehaviour
             targetImage = GetComponent<Image>();
 
         baseScale = transform.localScale;
-
         targetImage.color = colorA;
     }
 
-    public void OnEnable()
+    private void OnEnable()
     {
         EventBus.OnCassetteStart += EnablePulse;
         EventBus.OnCassetteStop += DisablePulse;
     }
 
-    public void OnDisable()
+    private void OnDisable()
     {
         EventBus.OnCassetteStart -= EnablePulse;
         EventBus.OnCassetteStop -= DisablePulse;
-        KillTweens();
+
+        targetImage.DOKill();
+        transform.DOKill();
+
+        targetImage.color = colorA;
         transform.localScale = baseScale;
+
+        isActive = false;
     }
-    
+
     public void EnablePulse()
     {
-        if (isActive) return;
+        if (isActive)
+            return;
+
         isActive = true;
 
-        KillTweens();
+        targetImage.DOKill();
+        transform.DOKill();
 
-       
-        colorTween = targetImage
+        targetImage
             .DOColor(colorB, duration)
+            .SetEase(Ease.InOutSine)
             .SetLoops(loop ? -1 : 1, LoopType.Yoyo)
-            .SetEase(Ease.InOutSine);
+            .SetUpdate(true);
 
-      
-        scaleTween = transform
+        transform
             .DOScale(baseScale * pulseScale, duration)
+            .SetEase(Ease.InOutSine)
             .SetLoops(loop ? -1 : 1, LoopType.Yoyo)
-            .SetEase(Ease.InOutSine);
+            .SetUpdate(true);
     }
-
 
     public void DisablePulse()
     {
-        if (!isActive) return;
+        if (!isActive)
+            return;
+
         isActive = false;
 
-        KillTweens();
-        
-        targetImage.DOColor(colorA, 0.15f);
-        transform.DOScale(baseScale, 0.15f);
-    }
+        targetImage.DOKill();
+        transform.DOKill();
 
-    private void KillTweens()
-    {
-        colorTween?.Kill();
-        scaleTween?.Kill();
+        targetImage
+            .DOColor(colorA, 0.15f)
+            .SetEase(Ease.OutQuad)
+            .SetUpdate(true);
+
+        transform
+            .DOScale(baseScale, 0.15f)
+            .SetEase(Ease.OutQuad)
+            .SetUpdate(true);
     }
 }

@@ -33,7 +33,6 @@ public class CassetteManager : MonoBehaviour
    
     private IEnumerator StartUpCassette()
     {
-        
         EventBus.RaiseOnCassetteStarted();
         _cassetteAudioSource.clip = _cassetteStartAudioClip;
         _cassetteAudioSource.Play();
@@ -112,7 +111,7 @@ public class CassetteManager : MonoBehaviour
         OnCassettePlayerButtonClicked();
     }
 
-    private IDisposable disposable; // null
+    private IDisposable disposable;
     private void OnEnable()
     {
         disposable = InputManager.Instance.BindPerformed("PlayCassette",Play);

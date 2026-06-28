@@ -24,7 +24,6 @@ public class ButtonTween : MonoBehaviour,
     private Tween floatTween;
     private Tween rotateTween;
 
-    private float randomOffset;
     private float randomDurationMultiplier;
 
     private void Awake()
@@ -35,7 +34,6 @@ public class ButtonTween : MonoBehaviour,
         startScale = rectTransform.localScale;
         startRotation = rectTransform.localEulerAngles;
 
-        randomOffset = Random.Range(0f, 2f * Mathf.PI);
         randomDurationMultiplier = Random.Range(0.85f, 1.15f);
     }
 
@@ -47,34 +45,38 @@ public class ButtonTween : MonoBehaviour,
             .DOAnchorPosY(startPos.y + floatAmount, adjustedDuration)
             .SetEase(Ease.InOutSine)
             .SetLoops(-1, LoopType.Yoyo)
-            .SetDelay(Random.Range(0f, 1f)); 
+            .SetDelay(Random.Range(0f, 1f))
+            .SetUpdate(true); 
 
         rotateTween = rectTransform
             .DOLocalRotate(startRotation + new Vector3(0, 0, 2f), adjustedDuration * 0.8f)
             .SetEase(Ease.InOutSine)
             .SetLoops(-1, LoopType.Yoyo)
-            .SetDelay(Random.Range(0f, 1f));
+            .SetDelay(Random.Range(0f, 1f))
+            .SetUpdate(true); 
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        AudioManager.PlaySound("hover");
+        AudioManager.PlaySound("hover", transform.position, true);
 
         rectTransform
             .DOScale(startScale * hoverScale, hoverDuration)
-            .SetEase(Ease.OutBack);
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         rectTransform
             .DOScale(startScale, hoverDuration)
-            .SetEase(Ease.OutQuad);
+            .SetEase(Ease.OutQuad)
+            .SetUpdate(true);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        AudioManager.PlaySound("click");
+        AudioManager.PlaySound("click", transform.position, true);
     }
 
     private void OnDestroy()
