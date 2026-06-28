@@ -10,4 +10,14 @@ public class SceneController : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
         );
     }
+    
+    public void QuitApplication()
+    {
+        Application.Quit();
+    }
+    
+    public void GotoScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }
