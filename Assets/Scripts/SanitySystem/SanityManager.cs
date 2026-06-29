@@ -59,7 +59,6 @@ public class SanityManager : MonoBehaviour
             int sanityDiff = BurningManAI.isHunting? huntSanityDrainPS: sanityDrainPS;
             yield return new WaitForSeconds(1f);
             
-            Debug.Log(stopDrain);
             if(!stopDrain)
                 DecreaseSanity(sanityDiff);
         }

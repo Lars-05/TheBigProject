@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9097725103585499889
+--- !u!1 &225272250066581349
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4017495419507632930}
-  - component: {fileID: 1501920315444948328}
-  - component: {fileID: 8962515819679150066}
-  - component: {fileID: 2743802364853828273}
-  - component: {fileID: 6696627458785764257}
+  - component: {fileID: 5928705618500975284}
+  - component: {fileID: 3540462961059338896}
+  - component: {fileID: 7750441198012139435}
+  - component: {fileID: 2238852340119667519}
+  - component: {fileID: 8518400495456292140}
   m_Layer: 5
-  m_Name: Star
+  m_Name: Justice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4017495419507632930
+--- !u!224 &5928705618500975284
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9097725103585499889}
+  m_GameObject: {fileID: 225272250066581349}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -39,21 +39,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 90, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1501920315444948328
+--- !u!222 &3540462961059338896
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9097725103585499889}
+  m_GameObject: {fileID: 225272250066581349}
   m_CullTransparentMesh: 1
---- !u!114 &8962515819679150066
+--- !u!114 &7750441198012139435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9097725103585499889}
+  m_GameObject: {fileID: 225272250066581349}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: abc4ee444d95c22a58da1f274f4b8333, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96832ba907dc8cc69822b69dc9585117, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77,13 +77,13 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2743802364853828273
+--- !u!114 &2238852340119667519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9097725103585499889}
+  m_GameObject: {fileID: 225272250066581349}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -117,32 +117,32 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 8962515819679150066}
+  m_TargetGraphic: {fileID: 7750441198012139435}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6696627458785764257}
-        m_TargetAssemblyTypeName: Star, Assembly-CSharp
-        m_MethodName: Use
-        m_Mode: 2
+      - m_Target: {fileID: 8518400495456292140}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6696627458785764257
+--- !u!114 &8518400495456292140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9097725103585499889}
+  m_GameObject: {fileID: 225272250066581349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0296a90ae0bccd1a4b36f5bb140d356c, type: 3}
+  m_Script: {fileID: 11500000, guid: 160262bb2bb195a1181d85ee0ba1d623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0

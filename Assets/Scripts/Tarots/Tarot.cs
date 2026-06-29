@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public abstract class Tarot : MonoBehaviour, IUsable
 {
-    protected float _duration;
+    [SerializeField] protected float _duration = 0.1f;
     private Image _image;
 
     private void Awake()

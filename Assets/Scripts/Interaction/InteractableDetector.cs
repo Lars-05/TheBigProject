@@ -17,6 +17,7 @@ public class InteractableDetector : MonoBehaviour
         if(Physics.Raycast(_camera.transform.position, dir, out RaycastHit hit, _interactionRange, _interactableLayer))
         {
             GameObject obj = hit.collider.gameObject;
+            
             if (obj.TryGetComponent(out IInteractable interactable))
             {
                 if (_lastInteractable == null || _lastInteractable != interactable)
