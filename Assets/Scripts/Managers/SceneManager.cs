@@ -62,7 +62,6 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator ChangeScene(string sceneName)
     {
-        SceneSwapFX.Close();
         SceneManager.LoadScene(sceneName);
         yield break;
     }
