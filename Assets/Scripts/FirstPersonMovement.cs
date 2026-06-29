@@ -57,10 +57,10 @@ public class FirstPersonMovement : MonoBehaviour
         _rigidbody.linearVelocity = newVelocity;
     }
 
-    public void SpeedBoost()
+    public void SpeedBoost(float duration)
     {
         _sprintSpeedMultiplier = 2.25f;
-        Invoke(nameof(StopSpeedBoost), 5);
+        Invoke(nameof(StopSpeedBoost), duration);
     }
     
     private void StopSpeedBoost() =>

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public abstract class Tarot : MonoBehaviour, IUsable
 {
-    [SerializeField] protected float _cooldown;
-    [SerializeField] private Image _image;
+    protected float _duration;
+    private Image _image;
 
     private void Awake()
     {
@@ -17,7 +17,8 @@ public abstract class Tarot : MonoBehaviour, IUsable
     
     protected void StartCooldownAnimation()
     {
-        _image.fillAmount = 0;
-        _image.DOFillAmount(1f, _cooldown);
+        _image.fillAmount = 1;
+        _image.DOFillAmount(0, _duration);
+        Destroy(gameObject, _duration + 0.2f);
     }
 }

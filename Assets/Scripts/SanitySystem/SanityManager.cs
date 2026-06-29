@@ -9,6 +9,7 @@ public class SanityManager : MonoBehaviour
     public static SanityDisplayerEvent GainSanity;
     public static SanityDisplayerEvent LoseSanity;
     public static bool isDead;
+    public static bool stopDrain;
 
     [SerializeField] private SanityDisplayer _sanityDisplayer;
     [SerializeField] private int sanityDrainPS = 1;
@@ -32,6 +33,13 @@ public class SanityManager : MonoBehaviour
         sanity = Mathf.RoundToInt(_sanityDisplayer.GetComponent<SanityDisplayer>()
             .GetComponentInChildren<Slider>().maxValue);
     }
+
+    public void ResetSanity()
+    {
+        sanity = Mathf.RoundToInt(_sanityDisplayer.GetComponent<SanityDisplayer>()
+            .GetComponentInChildren<Slider>().maxValue);
+    }
+    
     private void OnDisable()
     {
         GainSanity -= IncreaseSanity;
@@ -46,13 +54,14 @@ public class SanityManager : MonoBehaviour
 
     private IEnumerator DrainSanity()
     {
-
         while (true)
         {
             int sanityDiff = BurningManAI.isHunting? huntSanityDrainPS: sanityDrainPS;
             yield return new WaitForSeconds(1f);
-
-            DecreaseSanity(sanityDiff);
+            
+            Debug.Log(stopDrain);
+            if(!stopDrain)
+                DecreaseSanity(sanityDiff);
         }
     }
 
