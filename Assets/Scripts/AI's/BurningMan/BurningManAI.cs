@@ -95,7 +95,7 @@ public class BurningManAI : MonoBehaviour
             return;
         
         if (_target == null || _spawnCenter == null)
-            return;
+                return;
 
         switch (_currentState)
         {
@@ -109,6 +109,12 @@ public class BurningManAI : MonoBehaviour
         }
     }
 
+    public void SetStalkSpeed(float newSpeed)
+    {
+        _stalkSpeed = newSpeed;
+        _navMeshAgent.speed = newSpeed;
+    }
+    
     private void HandleStalking()
     {
         bool isLookedAt = _weepingAngleLogic.LookedAt();

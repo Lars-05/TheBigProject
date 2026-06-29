@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class FirstPersonMovement : MonoBehaviour
 {
-    [SerializeField] private float _sprintSpeedMultiplier = 1.25f;
+    [SerializeField] private float _sprintSpeedMultiplier = 1.75f;
     [SerializeField] private int _moveSpeed = 5;
     [SerializeField] private int _gravityMultiplier = 50;
     [SerializeField] private LayerMask _playerLayerMask;
@@ -66,13 +66,15 @@ public class FirstPersonMovement : MonoBehaviour
         _rigidbody.linearVelocity = newVelocity;
     }
 
-    private bool IsGrounded()
+    public void SpeedBoost(float duration)
     {
-        Physics.Raycast(transform.position + transform.up, Vector3.down, out var hit, 0.55f, ~_playerLayerMask);
-        
-        return hit.collider != null;
+        _sprintSpeedMultiplier = 2.25f;
+        Invoke(nameof(StopSpeedBoost), duration);
     }
-
+    
+    private void StopSpeedBoost() =>
+        _sprintSpeedMultiplier = 1.75f;
+    
     private void Move(InputAction.CallbackContext context) =>
         _moveVelocity = context.ReadValue<Vector2>();
 
