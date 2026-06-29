@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class CameraZoomOut : MonoBehaviour
 {
+    private static CameraZoomOut _instance;
+
     [SerializeField] private Camera gameplayCamera;
     [SerializeField] private AnimationClip zoomOutClip;
 
@@ -13,20 +15,20 @@ public class CameraZoomOut : MonoBehaviour
 
     private void Awake()
     {
+        _instance = this;
+
         _camera = GetComponent<Camera>();
         _animator = GetComponent<Animator>();
 
         _camera.enabled = false;
     }
 
-    private void OnEnable() => EventBus.OnWin += PlayZoomOut;
-    private void OnDisable() => EventBus.OnWin -= PlayZoomOut;
-
-    public void PlayZoomOut()
+    public static void Play()
     {
-        StartCoroutine(ZoomOutCoroutine());
+        if (_instance != null)
+            _instance.StartCoroutine(_instance.ZoomOutCoroutine());
     }
-
+    
     private IEnumerator ZoomOutCoroutine()
     {
         if (gameplayCamera != null)
@@ -44,5 +46,6 @@ public class CameraZoomOut : MonoBehaviour
 
         if (gameplayCamera != null)
             gameplayCamera.enabled = true;
+        SceneController.GotoScene("MainMenu");
     }
 }

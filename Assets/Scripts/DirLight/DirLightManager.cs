@@ -29,7 +29,6 @@ public class DirLightManager : MonoBehaviour
 
     private IEnumerator LerpIntensity(float targetIntensity, float duration)
     {
-        Debug.Log("Lerping intensity");
         float startIntensity = _light.intensity;
         float elapsed = 0f;
 

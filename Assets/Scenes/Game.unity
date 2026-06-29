@@ -17078,6 +17078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _relicsNeeded: 3
+  _gameManager: {fileID: 705872522}
 --- !u!1001 &1395500189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17742,7 +17743,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1832855861}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1465302081
 MonoBehaviour:
@@ -21738,7 +21739,6 @@ Transform:
   m_Children:
   - {fileID: 270301612}
   - {fileID: 195914663}
-  - {fileID: 1465302080}
   - {fileID: 358653265}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26354,6 +26354,7 @@ SceneRoots:
   - {fileID: 1238235877}
   - {fileID: 1832855861}
   - {fileID: 1011542640}
+  - {fileID: 1465302080}
   - {fileID: 918258365}
   - {fileID: 3703729672674138239}
   - {fileID: 8819057765043839395}

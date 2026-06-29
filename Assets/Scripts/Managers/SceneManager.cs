@@ -4,28 +4,61 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    private static SceneController _instance;
 
-    public void OnEnable()
+    private void Awake()
     {
-        if(SceneManager.GetActiveScene().name == "MainMenu")
-            return;
-        SceneSwapFX.Open();
-
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject); // Optional
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-    public void ResetScene()
+
+    private void OnEnable()
     {
-        StartCoroutine(ChangeScene(SceneManager.GetActiveScene().name));
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+            SceneSwapFX.Open();
+    }
+    
+
+    public static void ResetScene()
+    {
+        if (_instance != null)
+            _instance.StartCoroutine(_instance.ChangeScene(SceneManager.GetActiveScene().name));
     }
 
-    public void QuitApplication()
+    public static void GotoScene(string sceneName)
+    {
+        if (_instance != null)
+            _instance.StartCoroutine(_instance.ChangeScene(sceneName));
+    }
+
+    public static void QuitApplication()
     {
         Application.Quit();
     }
+    
 
-    public void GotoScene(string sceneName)
+    public void ResetSceneButton()
     {
-        StartCoroutine(ChangeScene(sceneName));
+        ResetScene();
     }
+
+    public void GotoSceneButton(string sceneName)
+    {
+        GotoScene(sceneName);
+    }
+
+    public void QuitApplicationButton()
+    {
+        QuitApplication();
+    }
+    
 
     private IEnumerator ChangeScene(string sceneName)
     {

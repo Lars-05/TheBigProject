@@ -4,6 +4,7 @@ using UnityEngine;
 public class RelicManager : MonoBehaviour
 {
     [SerializeField] private int _relicsNeeded;
+    [SerializeField] private GameManager _gameManager;
     public static int relicsNeeded {private set; get;}
     void Awake()
     {
@@ -15,7 +16,7 @@ public class RelicManager : MonoBehaviour
     {
         if (relicCount >= _relicsNeeded)
         {
-            EventBus.RaiseOnWin();
+            _gameManager.EndGame();
         }
     }
     

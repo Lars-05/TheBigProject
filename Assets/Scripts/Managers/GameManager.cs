@@ -1,16 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void EndGame()
     {
-        
+        StartCoroutine(OnGameEnd());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator OnGameEnd()
     {
-        
+        CameraZoomOut.Play();
+
+        yield break;
     }
 }
