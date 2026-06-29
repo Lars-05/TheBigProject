@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _Ui;
     public static bool gameEnded = false;
+
+    private void Start()
+    {
+        gameEnded = false;
+    }
     public void EndGame()
     {
         gameEnded = true;
