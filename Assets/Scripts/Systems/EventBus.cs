@@ -8,6 +8,8 @@ public static class EventBus
     public static event Action OnCassetteStop;
     
     public static event Action OnCassetteStart;
+
+    public static event Action OnWin;
     public static event Action ResetScene;
 
     public static void RaiseOnPlayerPassedOut()
@@ -17,8 +19,12 @@ public static class EventBus
     
     public static void RaiseOnCassetteStarted()
     {
-        
         OnCassetteStart?.Invoke();
+    }
+    
+    public static void RaiseOnWin()
+    {
+        OnWin?.Invoke();
     }
     
     public static void RaiseOnCassetteStopped()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class RelicManager : MonoBehaviour
@@ -8,14 +9,13 @@ public class RelicManager : MonoBehaviour
     {
         Relic.OnRelicAdded.AddListener(CheckRelicCount);
         relicsNeeded = _relicsNeeded;
-    }
 
+    }
     void CheckRelicCount(int relicCount)
     {
         if (relicCount >= _relicsNeeded)
         {
-            //win i guess
-            
+            EventBus.RaiseOnWin();
         }
     }
     
