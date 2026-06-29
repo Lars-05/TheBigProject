@@ -44,7 +44,7 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (SanityManager.isDead)
+        if (SanityManager.isDead || GameManager.gameEnded)
         {
             _rigidbody.linearVelocity = Vector3.zero;
             _rigidbody.Sleep();
