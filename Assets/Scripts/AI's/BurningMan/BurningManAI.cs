@@ -85,7 +85,7 @@ public class BurningManAI : MonoBehaviour
 
     private void Update()
     {
-        if(SanityManager.isDead)
+        if(SanityManager.isDead || GameManager.gameEnded)
             return;
         
         if (_target == null || _spawnCenter == null)

@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool gameEnded = false;
     public void EndGame()
     {
-        StartCoroutine(OnGameEnd());
+        gameEnded = true;
+    }
+
+    void Start()
+    {
+        EndGame();
     }
 
     IEnumerator OnGameEnd()

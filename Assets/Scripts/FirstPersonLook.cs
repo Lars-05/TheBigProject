@@ -29,7 +29,7 @@ public class FirstPersonLook : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if(SanityManager.isDead)
+        if(SanityManager.isDead || GameManager.gameEnded)
             return;
         
         Vector3 cameraEulerAngles = _cameraTransform.eulerAngles;
