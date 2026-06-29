@@ -3,23 +3,29 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 public class CassetteManager : MonoBehaviour
 {
     static bool isPlaying = false;
+
     [SerializeField] private GameObject _player;
     [SerializeField] private int _sanityPerSecond;
+
     private AudioSource _cassetteAudioSource;
     private AudioSource _songAudioSource;
+
     private AudioClip _cassetteStartAudioClip;
     private AudioClip _cassetteStopAudioClip;
     private AudioClip _cassetteSongAudioClip;
     private AudioClip _cassetteStaticAudioClip;
+
+    private float _songTime;
+
     public void Start()
     {
         ConfigureAudioSources();
     }
-   public void OnCassettePlayerButtonClicked()
+
+    public void OnCassettePlayerButtonClicked()
     {
         if (!isPlaying)
         {
@@ -27,32 +33,57 @@ public class CassetteManager : MonoBehaviour
             StartCoroutine(StartUpCassette());
             return;
         }
+
         isPlaying = false;
         StopPlaying();
     }
-   
+
     private IEnumerator StartUpCassette()
     {
         EventBus.RaiseOnCassetteStarted();
+
         _cassetteAudioSource.clip = _cassetteStartAudioClip;
         _cassetteAudioSource.Play();
 
         yield return new WaitForSeconds(_cassetteStartAudioClip.length);
 
-        _songAudioSource.clip = _cassetteSongAudioClip;
-
+        if (_songAudioSource.clip != _cassetteSongAudioClip)
+        {
+            _songAudioSource.clip = _cassetteSongAudioClip;
+            _songAudioSource.time = _songTime;
+            _songAudioSource.Play();
+        }
+        else
+        {
+            if (_songAudioSource.time > 0f && !_songAudioSource.isPlaying)
+                _songAudioSource.UnPause();
+            else if (!_songAudioSource.isPlaying)
+                _songAudioSource.Play();
+        }
 
         InvokeRepeating(nameof(IncreaseSanity), 1f, 1f);
     }
-    void StopPlaying()
+
+    private void StopPlaying()
     {
         EventBus.RaiseOnCassetteStopped();
+
         CancelInvoke(nameof(IncreaseSanity));
-        _songAudioSource.Pause();
+
+        if (_songAudioSource.clip == _cassetteSongAudioClip)
+        {
+            _songTime = _songAudioSource.time;
+            _songAudioSource.Pause();
+        }
+        else
+        {
+            _songAudioSource.Stop();
+        }
+
         _cassetteAudioSource.clip = _cassetteStopAudioClip;
         _cassetteAudioSource.Play();
     }
-    
+
     private void ConfigureAudioSources()
     {
         _cassetteStartAudioClip = AudioManager.GetAudioClip("CassetteInsert");
@@ -60,11 +91,10 @@ public class CassetteManager : MonoBehaviour
         _cassetteSongAudioClip = AudioManager.GetAudioClip("CaliforniaGurls");
         _cassetteStaticAudioClip = AudioManager.GetAudioClip("Static");
 
-        
         _cassetteAudioSource = AudioManager.InterceptSource(_player);
         _cassetteAudioSource.playOnAwake = false;
         _cassetteAudioSource.loop = false;
-        
+
         _songAudioSource = AudioManager.InterceptSource(_player);
         _songAudioSource.playOnAwake = false;
         _songAudioSource.loop = true;
@@ -79,15 +109,17 @@ public class CassetteManager : MonoBehaviour
             return;
         }
 
-        
         if (BurningManAI.isHunting)
         {
             if (_songAudioSource.clip != _cassetteStaticAudioClip)
             {
+                _songTime = _songAudioSource.time;
+
                 _songAudioSource.Stop();
                 _songAudioSource.clip = _cassetteStaticAudioClip;
                 _songAudioSource.Play();
             }
+
             return;
         }
 
@@ -95,30 +127,33 @@ public class CassetteManager : MonoBehaviour
         {
             _songAudioSource.Stop();
             _songAudioSource.clip = _cassetteSongAudioClip;
+            _songAudioSource.time = _songTime;
             _songAudioSource.Play();
         }
 
         if (!_songAudioSource.isPlaying)
-            _songAudioSource.Play();
+            _songAudioSource.UnPause();
 
         SanityManager.GainSanity?.Invoke(_sanityPerSecond);
     }
-    
+
     private void Play(InputAction.CallbackContext _)
     {
         if (SanityManager.isDead)
             return;
+
         OnCassettePlayerButtonClicked();
     }
 
     private IDisposable disposable;
+
     private void OnEnable()
     {
-        disposable = InputManager.Instance.BindPerformed("PlayCassette",Play);
-    }
-    private void OnDisable()
-    {
-        disposable.Dispose();
+        disposable = InputManager.Instance.BindPerformed("PlayCassette", Play);
     }
 
+    private void OnDisable()
+    {
+        disposable?.Dispose();
+    }
 }

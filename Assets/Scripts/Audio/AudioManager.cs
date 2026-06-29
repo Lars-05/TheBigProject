@@ -4,7 +4,6 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     private static AudioManager _instance;
-
     private static AudioSource _musicSource;
     private static AudioSource _sfx;
     private static readonly Dictionary<string, AudioClip> _audios = new();
@@ -24,6 +23,11 @@ public class AudioManager : MonoBehaviour
         
         foreach (var sound in Resources.LoadAll<AudioClip>("Audio"))
             _audios[sound.name] = sound;
+    }
+
+    public static void SetVolume(float volume)
+    {
+        AudioListener.volume = Mathf.Clamp01(volume);
     }
 
     public static void PlaySound(string soundName)

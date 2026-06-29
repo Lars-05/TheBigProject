@@ -7,7 +7,12 @@ public class InterlacingShaderEffect : MonoBehaviour
     [SerializeField] private Material interlacingMaterial;
 
     [Header("Settings")]
-    [SerializeField, Range(0f, 1f)] private float defaultIntensity = 1f;
+    [SerializeField, Range(0f, 1f)] private float defaultIntensity = 0.476f;
+    
+    void Start()
+    {
+        ResetIntensity();
+    }
     public void ResetIntensity()
     {
         interlacingMaterial.SetFloat("_Intensity", defaultIntensity);
