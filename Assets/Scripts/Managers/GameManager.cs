@@ -14,18 +14,13 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         gameEnded = true;
-    }
-
-    void Start()
-    {
-        EndGame();
+        StartCoroutine(OnGameEnd());
     }
 
     IEnumerator OnGameEnd()
     {
         _Ui.SetActive(false);
         CameraZoomOut.Play();
-
         yield break;
     }
 }
