@@ -88,7 +88,7 @@ public class CassetteManager : MonoBehaviour
     {
         _cassetteStartAudioClip = AudioManager.GetAudioClip("CassetteInsert");
         _cassetteStopAudioClip = AudioManager.GetAudioClip("CassetteTakeOut");
-        _cassetteSongAudioClip = AudioManager.GetAudioClip("CaliforniaGurls");
+        _cassetteSongAudioClip = AudioManager.GetAudioClip("CassetteMusic");
         _cassetteStaticAudioClip = AudioManager.GetAudioClip("Static");
 
         _cassetteAudioSource = AudioManager.InterceptSource(_player);

@@ -23,6 +23,7 @@ public class OpenScroll : MonoBehaviour
 
     public void Open()
     {
+        AudioManager.PlaySound("PageTurn");
         imageRect.DOScaleX(1f, duration)
             .SetEase(ease);
         for (int i = 0; i < imageRect.childCount; i++)
