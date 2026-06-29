@@ -52,6 +52,7 @@ public class BurningManAI : MonoBehaviour
     [SerializeField] private float _cameraShakeFadeIn;
 
     private AudioSource _fireAudioSource;
+    private AudioSource _chainAudioSource;
     public enum States
     {
         STALKING,
@@ -80,6 +81,11 @@ public class BurningManAI : MonoBehaviour
         _fireAudioSource = AudioManager.InterceptSource(this.gameObject);
         _fireAudioSource.loop = true;
         _fireAudioSource.clip = AudioManager.GetAudioClip("OnFire");
+        
+        _chainAudioSource = AudioManager.InterceptSource(this.gameObject);
+        _chainAudioSource.loop = true;
+        _chainAudioSource.clip = AudioManager.GetAudioClip("Chains");
+        
         TeleportToRandomPosition();
     }
 
@@ -109,6 +115,7 @@ public class BurningManAI : MonoBehaviour
 
         if (!isLookedAt)
         {
+            _chainAudioSource.Stop();
             _timeLookedAt += Time.deltaTime;
             _navMeshAgent.isStopped = true;
             _animator.Play(_idleAnimation.name);
@@ -116,6 +123,8 @@ public class BurningManAI : MonoBehaviour
         }
         else
         {
+            if(!_chainAudioSource.isPlaying)
+                _chainAudioSource.Play();
             _animator.Play(_walkingAnimation.name);
             _timeLookedAt = Mathf.Max(
                 0f,
