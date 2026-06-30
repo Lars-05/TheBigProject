@@ -25,6 +25,11 @@ public class AudioManager : MonoBehaviour
             _audios[sound.name] = sound;
     }
 
+    private void Start()
+    {
+        _musicSource.loop = true;
+    }
+
     public static void SetVolume(float volume)
     {
         AudioListener.volume = Mathf.Clamp01(volume);
@@ -74,8 +79,10 @@ public class AudioManager : MonoBehaviour
     }
     /// ----------
 
-    public void PlayMusic(string soundName)
+    public static void PlayMusic(string soundName)
     {
-        _musicSource.PlayOneShot(_audios[soundName]);
+        _musicSource.clip = _audios[soundName];
+        _musicSource.Play();
+        Debug.Log(_musicSource.clip);
     }
 }
