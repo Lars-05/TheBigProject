@@ -44,6 +44,9 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
+        Debug.Log(SanityManager.isDead);
+        Debug.Log( GameManager.gameEnded);
         if (SanityManager.isDead || GameManager.gameEnded)
         {
             _rigidbody.linearVelocity = Vector3.zero;
@@ -56,9 +59,6 @@ public class FirstPersonMovement : MonoBehaviour
         Transform camera = Camera.main.transform;
         newVelocity += transform.forward * (_moveVelocity.y * _moveSpeed * Time.fixedDeltaTime);
         newVelocity += camera.right * (_moveVelocity.x * _moveSpeed * Time.fixedDeltaTime);
-        
-        if(!IsGrounded())
-            newVelocity += -transform.up * (_gravityMultiplier * Time.fixedDeltaTime);
         
         if(_sprinting)
             newVelocity *= _sprintSpeedMultiplier;

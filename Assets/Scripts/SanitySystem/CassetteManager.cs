@@ -64,7 +64,7 @@ public class CassetteManager : MonoBehaviour
         InvokeRepeating(nameof(IncreaseSanity), 1f, 1f);
     }
 
-    private void StopPlaying()
+    public void StopPlaying()
     {
         EventBus.RaiseOnCassetteStopped();
 

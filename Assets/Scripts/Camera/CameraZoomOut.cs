@@ -35,9 +35,9 @@ public class CameraZoomOut : MonoBehaviour
             gameplayCamera.enabled = false;
 
         _camera.enabled = true;
-
+        
         _animator.Play(zoomOutClip.name);
-
+        AudioManager.PlaySound("Sunrise");
         DirLightManager.SetIntensity(1f, zoomOutClip.length);
 
         yield return new WaitForSeconds(zoomOutClip.length);

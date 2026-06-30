@@ -6,30 +6,30 @@ public class SceneController : MonoBehaviour
 {
     private static SceneController _instance;
 
+    [SerializeField] private ScrollTransision scrollTransition;
+
     private void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject); // Optional
-        }
-        else
+        if (_instance != null)
         {
             Destroy(gameObject);
+            return;
         }
+
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnEnable()
+    private void OnDestroy()
     {
-        if (SceneManager.GetActiveScene().name != "MainMenu")
-            SceneSwapFX.Open();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    
 
-    public static void ResetScene()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (_instance != null)
-            _instance.StartCoroutine(_instance.ChangeScene(SceneManager.GetActiveScene().name));
+        scrollTransition = FindFirstObjectByType<ScrollTransision>();
     }
 
     public static void GotoScene(string sceneName)
@@ -38,31 +38,24 @@ public class SceneController : MonoBehaviour
             _instance.StartCoroutine(_instance.ChangeScene(sceneName));
     }
 
+    private IEnumerator ChangeScene(string sceneName)
+    {
+        Debug.Log("Loading scene: " + sceneName);
+        
+        if (scrollTransition != null)
+        {
+            yield return scrollTransition.Open();
+        }
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!op.isDone)
+            yield return null;
+        
+    }
+
     public static void QuitApplication()
     {
         Application.Quit();
-    }
-    
-
-    public void ResetSceneButton()
-    {
-        ResetScene();
-    }
-
-    public void GotoSceneButton(string sceneName)
-    {
-        GotoScene(sceneName);
-    }
-
-    public void QuitApplicationButton()
-    {
-        QuitApplication();
-    }
-    
-
-    private IEnumerator ChangeScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-        yield break;
     }
 }

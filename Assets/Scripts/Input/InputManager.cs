@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,12 @@ public class InputManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         
         _playerInput = GetComponent<PlayerInput>();
+       
+    }
+
+    void OnEnable()
+    {
+        EnableInput(true);
     }
 
     public IDisposable BindPerformed(string actionName, Action<InputAction.CallbackContext> callback)
