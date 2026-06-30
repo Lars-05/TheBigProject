@@ -18,7 +18,7 @@ public class SceneController : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(gameObject);
-
+        scrollTransition.gameObject.SetActive(true);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
