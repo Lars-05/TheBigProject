@@ -38,7 +38,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Enable: 0
-    - _Intensity: 0.6
+    - _Intensity: 0.3
     - _NoiseScale: -9.5
     - _Speed: 0.02
     - _StripeDensity: 0.987
