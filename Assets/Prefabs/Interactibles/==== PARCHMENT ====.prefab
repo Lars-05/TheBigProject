@@ -301,9 +301,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "  A forest haunted by a burning man. Chasing those who dare enter it's
-    domain. Do not stare or let him close, or he will reap your soul where you stand.\n 
-    To release yourself of his imminent demise, find the 3 relics left on his land."
+  m_text: "  Thou are now trapped, like many men before thee and many shall be after
+    thee. \r\n  The devilish noble lord requires his relics returned.\r\n  A chalice,
+    a mirror and a spit.  'Tis thyne only escape. \r\n  The Gleunige, a man on fire,
+    keeps them hidden to spite the lord. \r\n  Be aware, when the bell doth toll,
+    'tmeans he's coming for thee. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a91817016592d144a96b3737512862a6, type: 2}
   m_sharedMaterial: {fileID: 6096986128710887827, guid: a91817016592d144a96b3737512862a6, type: 2}
@@ -330,8 +332,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12.8
-  m_fontSizeBase: 12.8
+  m_fontSize: 10.45
+  m_fontSizeBase: 10.45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
