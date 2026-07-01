@@ -14,6 +14,8 @@ public class Justice : Tarot
     {
         _burningManAI.SetStalkSpeed(0);
         Invoke(nameof(ResetStalkSpeed), 5);
+        Debug.Log("!");
+        StartCooldownAnimation();
     }
 
     private void ResetStalkSpeed()

@@ -6382,6 +6382,7 @@ GameObject:
   - component: {fileID: 449662702}
   - component: {fileID: 449662701}
   - component: {fileID: 449662705}
+  - component: {fileID: 449662706}
   m_Layer: 5
   m_Name: Star (1)
   m_TagString: Untagged
@@ -6529,6 +6530,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatAmount: 6
   floatDuration: 2
+--- !u!114 &449662706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449662699}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.7678805, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1001 &453316636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10297,6 +10313,7 @@ GameObject:
   - component: {fileID: 712931701}
   - component: {fileID: 712931700}
   - component: {fileID: 712931704}
+  - component: {fileID: 712931705}
   m_Layer: 5
   m_Name: Justice
   m_TagString: Untagged
@@ -10444,6 +10461,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatAmount: 6
   floatDuration: 2
+--- !u!114 &712931705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712931698}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.7678805, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1 &713940331
 GameObject:
   m_ObjectHideFlags: 0
@@ -18815,6 +18847,7 @@ GameObject:
   - component: {fileID: 1418501998}
   - component: {fileID: 1418501997}
   - component: {fileID: 1418502001}
+  - component: {fileID: 1418502002}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -18962,6 +18995,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatAmount: 6
   floatDuration: 2
+--- !u!114 &1418502002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418501995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.7678805, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1001 &1418950057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28297,6 +28345,7 @@ GameObject:
   - component: {fileID: 5263289112525035247}
   - component: {fileID: 5730751610741853884}
   - component: {fileID: 5730751610741853885}
+  - component: {fileID: 5730751610741853886}
   m_Layer: 5
   m_Name: Lovers
   m_TagString: Untagged
@@ -28586,6 +28635,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatAmount: 6
   floatDuration: 2
+--- !u!114 &5730751610741853886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2504705404460170924}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.7678805, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!33 &5793885384733464712
 MeshFilter:
   m_ObjectHideFlags: 0
