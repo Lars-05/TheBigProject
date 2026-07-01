@@ -54,7 +54,9 @@ public class FirstPersonMovement : MonoBehaviour
             return;
         }
 
+        
         Vector3 newVelocity = Vector3.zero;
+        newVelocity.y = -_gravityMultiplier;
         
         Transform camera = Camera.main.transform;
         newVelocity += transform.forward * (_moveVelocity.y * _moveSpeed * Time.fixedDeltaTime);

@@ -14,6 +14,7 @@ public class BurningManAI : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private GameObject _spawnCenter;
     [SerializeField] private GameObject _target;
+    [SerializeField] private GameObject _model;
     [SerializeField] private WeepingAngleLogic _weepingAngleLogic;
 
     [Header("Teleport")]
@@ -44,6 +45,7 @@ public class BurningManAI : MonoBehaviour
     [SerializeField] private float _maxChaseTime = 10f;
     [SerializeField] private float _minDistanceForAttackTarget = 1.5f;
     [SerializeField] private int _sanityLossOnAttack = 20;
+    [SerializeField] private float _cooldown = 10;
 
     [Header("VFX")] 
     [SerializeField] private float _cameraShakeRoughness;
@@ -56,7 +58,8 @@ public class BurningManAI : MonoBehaviour
     public enum States
     {
         STALKING,
-        CHASING
+        CHASING,
+        IDLE,
     }
 
     [HideInInspector] public States _currentState;
@@ -225,9 +228,20 @@ public class BurningManAI : MonoBehaviour
 
         _navMeshAgent.speed = _stalkSpeed;
         isHunting = false;
+
+        StartCoroutine(OnChaseStopped());
+        Debug.Log("[BurningManAI]: Stopped chasing");
+    }
+
+    private IEnumerator OnChaseStopped()
+    {
+        _model.SetActive(false);
+        _currentState = States.IDLE;
+        yield return new WaitForSeconds(_cooldown);
+        _currentState = States.STALKING;
+        _model.SetActive(true);
         TeleportToRandomPosition();
         
-        Debug.Log("[BurningManAI]: Stopped chasing");
     }
 
     private void TeleportToRandomPosition()
@@ -261,6 +275,7 @@ public class BurningManAI : MonoBehaviour
         {
             _navMeshAgent.Warp(hit.position);
         }
+        AudioManager.PlaySound("Bells");
     }
 
     private void GoToPosition(Vector3 position)

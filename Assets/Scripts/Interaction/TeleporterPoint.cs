@@ -14,6 +14,7 @@ public class TeleporterPoint : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+        AudioManager.PlaySound("DoorCreak");
         tpM.StartTeleportSequence(tpPoint.position);
     }
 }
