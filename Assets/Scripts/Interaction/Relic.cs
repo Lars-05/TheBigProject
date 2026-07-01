@@ -3,12 +3,14 @@ using UnityEngine.Events;
 
 public class Relic : MonoBehaviour, IInteractable
 {
+    
     public static UnityEvent<int> OnRelicAdded = new();
     private static int _relicCount;
     
     [SerializeField] private Material _selectedMaterial;
     [SerializeField] private GameObject _rotateObject;
     [SerializeField] private MeshRenderer _renderer;
+    [SerializeField] private SphereCollider _collider;
 
     private Material[] _defaultMaterials;
     private Material[] _selectedMaterials;
@@ -34,6 +36,18 @@ public class Relic : MonoBehaviour, IInteractable
             _selectedMaterials[i] = _defaultMaterials[i];
 
         _selectedMaterials[^1] = _selectedMaterial;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+            OnHoverStay();
+    }
+    
+    public void OnTriggerStay(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+            OnHoverStay();
     }
 
     public void OnHoverEnter()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7715454039646207773}
   - component: {fileID: 6155935623645276453}
   - component: {fileID: 8504927615203640656}
-  - component: {fileID: 5179191764619850528}
+  - component: {fileID: 9021198120583035557}
   m_Layer: 0
   m_Name: FenceMiddlePiece
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9196748081556683140}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5179191764619850528
-MeshCollider:
+--- !u!65 &9021198120583035557
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,7 +105,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3785290851254076615, guid: 9f7e70999c5cb1748943bbaf233a721e, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 8.323132, y: 227.25975, z: 199.94214}
+  m_Center: {x: -0.000054912096, y: 113.629875, z: 102.727905}

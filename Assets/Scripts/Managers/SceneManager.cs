@@ -29,6 +29,12 @@ public class SceneController : MonoBehaviour
         if (_instance != null)
             _instance.StartCoroutine(_instance.ChangeScene(sceneName));
     }
+    
+    public static void ResetScene()
+    {
+        if (_instance != null)
+            _instance.StartCoroutine(_instance.ChangeScene(SceneManager.GetActiveScene().name));
+    }
 
     private IEnumerator ChangeScene(string sceneName)
     {

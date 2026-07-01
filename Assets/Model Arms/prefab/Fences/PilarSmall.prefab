@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4256411897793978196}
   - component: {fileID: 3637896024892143175}
   - component: {fileID: 3469108439735778769}
-  - component: {fileID: 4347885069342519788}
+  - component: {fileID: 6436697291631263764}
   m_Layer: 0
   m_Name: PilarSmall
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2952519644963681533}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4347885069342519788
-MeshCollider:
+--- !u!65 &6436697291631263764
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,7 +105,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1803410174649967843, guid: 9f7e70999c5cb1748943bbaf233a721e, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 75.787605, y: 306.994, z: 75.78712}
+  m_Center: {x: -0.001953125, y: 153.497, z: 0.0078125}
