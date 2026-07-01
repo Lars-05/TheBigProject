@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -11,18 +12,31 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         if (_instance != null && _instance != this)
+        {
             Destroy(gameObject);
-        else
-            _instance = this;
-        
-        transform.parent = null;
+            return;
+        }
+
+        _instance = this;
+
         DontDestroyOnLoad(gameObject);
-        
-        _musicSource = _instance.gameObject.AddComponent<AudioSource>();
-        _sfx = _instance.gameObject.AddComponent<AudioSource>();
-        
+
+        _musicSource = gameObject.AddComponent<AudioSource>();
+        _sfx = gameObject.AddComponent<AudioSource>();
+
         foreach (var sound in Resources.LoadAll<AudioClip>("Audio"))
             _audios[sound.name] = sound;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _sfx.Stop();
+        _musicSource.Stop();
+
+        _sfx.clip = null;
+        _musicSource.clip = null;
     }
 
     private void Start()
