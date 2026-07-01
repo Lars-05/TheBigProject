@@ -6763,6 +6763,7 @@ GameObject:
   - component: {fileID: 449662702}
   - component: {fileID: 449662701}
   - component: {fileID: 449662705}
+  - component: {fileID: 449662706}
   m_Layer: 5
   m_Name: Star (1)
   m_TagString: Untagged
@@ -6801,7 +6802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0296a90ae0bccd1a4b36f5bb140d356c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0.1
+  _duration: 0.5
 --- !u!114 &449662702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6910,6 +6911,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatAmount: 6
   floatDuration: 2
+--- !u!114 &449662706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449662699}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.7678805, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1001 &453316636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10926,6 +10942,7 @@ GameObject:
   - component: {fileID: 712931701}
   - component: {fileID: 712931700}
   - component: {fileID: 712931704}
+  - component: {fileID: 712931705}
   m_Layer: 5
   m_Name: Justice
   m_TagString: Untagged
@@ -10964,7 +10981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160262bb2bb195a1181d85ee0ba1d623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0.1
+  _duration: 5
 --- !u!114 &712931701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11073,6 +11090,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatAmount: 6
   floatDuration: 2
+--- !u!114 &712931705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712931698}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.7678805, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1 &713940331
 GameObject:
   m_ObjectHideFlags: 0
@@ -17918,6 +17950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1258833836}
   - component: {fileID: 1258833837}
+  - component: {fileID: 1258833838}
   m_Layer: 0
   m_Name: Tarots
   m_TagString: Untagged
@@ -17974,6 +18007,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1258833838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258833835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58be396247a39ae4894abc53a3388c03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectedCardIndex: 0
+  _player: {fileID: 158106680}
 --- !u!4 &1264105599 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7715454039646207773, guid: faefb898ea6fb4f4eb0d6ee0b003a989, type: 3}
@@ -19782,6 +19829,7 @@ GameObject:
   - component: {fileID: 1418501998}
   - component: {fileID: 1418501997}
   - component: {fileID: 1418502001}
+  - component: {fileID: 1418502002}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -19876,7 +19924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7519b46aac2790aaa917e78713fd71a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0.1
+  _duration: 10
 --- !u!114 &1418501999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19929,6 +19977,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatAmount: 6
   floatDuration: 2
+--- !u!114 &1418502002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418501995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.7678805, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1001 &1418950057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29844,6 +29907,7 @@ GameObject:
   - component: {fileID: 5263289112525035247}
   - component: {fileID: 5730751610741853884}
   - component: {fileID: 5730751610741853885}
+  - component: {fileID: 5730751610741853886}
   m_Layer: 5
   m_Name: Lovers
   m_TagString: Untagged
@@ -30118,7 +30182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302553399dad73d6c9105502a7ac34bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0.1
+  _duration: 10
 --- !u!114 &5730751610741853885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30133,6 +30197,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatAmount: 6
   floatDuration: 2
+--- !u!114 &5730751610741853886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2504705404460170924}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.7678805, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!33 &5793885384733464712
 MeshFilter:
   m_ObjectHideFlags: 0

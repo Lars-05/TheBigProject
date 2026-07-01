@@ -14,11 +14,11 @@ public class Star : Tarot
     {
         _sanityManager.ResetSanity();
         Invoke(nameof(StartDrain), _duration);
+        StartCooldownAnimation();
     }
 
     private void StartDrain()
     {
         SanityManager.stopDrain = false;
-        Destroy(gameObject);
     }
 }
