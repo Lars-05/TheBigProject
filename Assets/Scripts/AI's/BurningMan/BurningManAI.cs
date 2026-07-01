@@ -88,8 +88,8 @@ public class BurningManAI : MonoBehaviour
         _chainAudioSource = AudioManager.InterceptSource(this.gameObject);
         _chainAudioSource.loop = true;
         _chainAudioSource.clip = AudioManager.GetAudioClip("Chains");
-        
-        TeleportToRandomPosition();
+
+        StartCoroutine(OnChaseStopped());
     }
 
     private void Update()

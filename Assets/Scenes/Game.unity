@@ -28512,7 +28512,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sensetivity
+  m_text: Sensitivity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 146ede31e9a53af44a2cbd641e8027ad, type: 2}
   m_sharedMaterial: {fileID: -3340174427219522269, guid: 146ede31e9a53af44a2cbd641e8027ad, type: 2}
