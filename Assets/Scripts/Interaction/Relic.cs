@@ -19,6 +19,7 @@ public class Relic : MonoBehaviour, IInteractable
 
     private void Awake()
     {
+        _relicCount = 0;
         if (_renderer == null)
             _renderer = GetComponent<MeshRenderer>();
 
