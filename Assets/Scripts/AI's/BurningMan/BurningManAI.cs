@@ -94,11 +94,11 @@ public class BurningManAI : MonoBehaviour
 
     private void Update()
     {
-        if(SanityManager.isDead || GameManager.gameEnded)
+        if (SanityManager.isDead || GameManager.gameEnded)
             return;
-        
+
         if (_target == null || _spawnCenter == null)
-                return;
+            return;
 
         switch (_currentState)
         {
@@ -109,6 +109,10 @@ public class BurningManAI : MonoBehaviour
             case States.CHASING:
                 HandleChasing();
                 break;
+
+            case States.IDLE:
+                _navMeshAgent.isStopped = true;
+                return;
         }
     }
 
@@ -219,29 +223,41 @@ public class BurningManAI : MonoBehaviour
         _fireAudioSource.Stop();
         _fxHolder.SetActive(false);
         _animator.Play(_idleAnimation.name);
+
         VFXManager.StopVignettePulse();
         VFXManager.ResetInterlacingStrength();
-        VFXManager.SetFov(60,1);
-        _currentState = States.STALKING;
+        VFXManager.SetFov(60, 1);
+
         _timeChasing = 0f;
         _timeLookedAt = 0f;
 
         _navMeshAgent.speed = _stalkSpeed;
+
         isHunting = false;
 
         StartCoroutine(OnChaseStopped());
+
         Debug.Log("[BurningManAI]: Stopped chasing");
     }
 
     private IEnumerator OnChaseStopped()
     {
-        _model.SetActive(false);
         _currentState = States.IDLE;
+
+        _model.SetActive(false);
+        _navMeshAgent.isStopped = true;
+
         yield return new WaitForSeconds(_cooldown);
-        _currentState = States.STALKING;
+
         _model.SetActive(true);
+
         TeleportToRandomPosition();
-        
+
+        _timeChasing = 0f;
+        _timeLookedAt = 0f;
+
+        _currentState = States.STALKING;
+        _navMeshAgent.isStopped = false;
     }
 
     private void TeleportToRandomPosition()

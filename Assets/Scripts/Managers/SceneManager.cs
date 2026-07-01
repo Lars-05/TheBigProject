@@ -17,21 +17,13 @@ public class SceneController : MonoBehaviour
         }
 
         _instance = this;
-        DontDestroyOnLoad(gameObject);
-        scrollTransition.gameObject.SetActive(true);
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
 
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        scrollTransition = FindFirstObjectByType<ScrollTransision>();
+      
+            scrollTransition.gameObject.SetActive(true);
+        
     }
-
+    
     public static void GotoScene(string sceneName)
     {
         if (_instance != null)
